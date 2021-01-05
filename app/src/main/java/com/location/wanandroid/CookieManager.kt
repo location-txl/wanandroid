@@ -7,7 +7,7 @@ import okhttp3.HttpUrl
 
 class CookieManager:CookieJar {
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-        TextUtils.join
+//        TextUtils.join
     }
 
     override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
