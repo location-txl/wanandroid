@@ -1,3 +1,5 @@
+import com.location.dependencies.AppConfig
+import com.location.dependencies.Versions
 
 plugins {
     id 'com.android.application'
@@ -12,9 +14,9 @@ android {
 
 
     defaultConfig {
-        applicationId rootProject.applicationId
-        versionCode 1
-        versionName "1.0"
+        applicationId AppConfig.APPLICATION_ID
+        versionCode AppConfig.version_code
+        versionName AppConfig.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,23 +34,23 @@ android {
 dependencies {
     implementation project(":base")
     //fragment 扩展函数
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "androidx.fragment:fragment-ktx:$Versions.fragment_version"
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     //lifecycle-livedata scope
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Versions.lifecycle_version"
     //kapt优化lifecycle
-    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$Versions.lifecycle_version"
     //viewmodle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Versions.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Versions.lifecycle_version"
     //lifecycle scope
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$Versions.lifecycle_version"
 
 
 //    implementation "androidx.navigation:navigation-runtime-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$Versions.navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$Versions.navigation_version"
 
 
     //retrofit 网络库

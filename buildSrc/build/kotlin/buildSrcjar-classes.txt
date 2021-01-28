@@ -1,0 +1,1 @@
+/Users/tianxiaolong/xueyizhixing/wanandroid/buildSrc/build/classes/kotlin/main/com/location/dependencies/AppConfig.class:/Users/tianxiaolong/xueyizhixing/wanandroid/buildSrc/build/classes/kotlin/main/com/location/dependencies/Deps.class:/Users/tianxiaolong/xueyizhixing/wanandroid/buildSrc/build/classes/kotlin/main/com/location/dependencies/Versions.class

@@ -1,19 +1,23 @@
 /**
  * 通用的gradle配置 所有的modle app都需要依赖此gradle
  */
-//apply plugin: 'kotlin-android'
+
+import com.location.dependencies.*
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion rootProject.compile_version
-    buildToolsVersion rootProject.build_tool_version
+    compileSdkVersion AppConfig.compile_version
+    buildToolsVersion AppConfig.build_tool_version
     defaultConfig {
-        minSdkVersion rootProject.min_sdk_version
-        targetSdkVersion rootProject.target_sdk_version
+        minSdkVersion AppConfig.min_sdk_version
+        targetSdkVersion AppConfig.target_sdk_version
     }
 
-    buildFeatures{
-        viewBinding = true
+    if(AppConfig.IS_BINDING){
+        buildFeatures{
+            viewBinding = true
+        }
     }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -27,17 +31,17 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$material_version"
-    testImplementation "junit:junit:$junit_vrsion"
+    implementation "androidx.core:core-ktx:$Versions.core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$Versions.appcompat_version"
+    implementation "com.google.android.material:material:$Versions.material_version"
+    testImplementation "junit:junit:$Versions.junit_vrsion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
-    implementation  "androidx.startup:startup-runtime:$startup_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$Versions.espresso_core_version"
+    implementation  "androidx.startup:startup-runtime:$Versions.startup_version"
 
     //协程
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$Versions.coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$Versions.coroutines_version"
 
 
 }
