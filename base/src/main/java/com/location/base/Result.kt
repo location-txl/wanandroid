@@ -10,11 +10,21 @@ import java.lang.Exception
  * 密封类
  * 处理网络请求是否处理成功
  */
-sealed class Result<out T> {
-fun isSuccess():Boolean = this is Success
-fun isFail():Boolean = this is Fail
 
-    data class Success<out T>(val data:T) : Result<T>()
-    data class Fail(val error:Exception): Result<Nothing>()
+sealed class Result<out T> {
+    fun isSuccess(): Boolean = this is Success
+    fun isFail(): Boolean = this is Fail
+    data class Success<out T>(val data: T) : Result<T>()
+    data class Fail(val error: Exception, val code: Int = -1) : Result<Nothing>()
+}
+
+inline fun <T> Result<T>.parseResult(
+    success: (data: T) -> Unit,
+    errorBlock: (code: Int, msg: String) -> Unit
+) {
+    when (this) {
+        is Result.Success -> success(data)
+        is Result.Fail -> errorBlock(code, error.message!!)
+    }
 }
 
