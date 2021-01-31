@@ -3,18 +3,10 @@ package com.location.wanandroid.data
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class UserData (
-    @Json(name = "data")
-    val data: Data,
-    @Json(name = "errorCode")
-    val errorCode: Int,
-    @Json(name = "errorMsg")
-    val errorMsg: String
-)
+
 
 @JsonClass(generateAdapter = true)
-data class Data(
+data class UserData(
     @Json(name = "admin")
     val admin: Boolean,
     @Json(name = "chapterTops")

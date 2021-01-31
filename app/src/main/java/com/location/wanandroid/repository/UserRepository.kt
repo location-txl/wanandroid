@@ -1,8 +1,9 @@
 package com.location.wanandroid.repository
 
+import com.location.base.BaseRepository
+import com.location.base.Result
 import com.location.wanandroid.data.UserData
-import kotlinx.coroutines.Deferred
 
-interface UserRepository {
-    suspend fun login(username:String,pwd:String): UserData
+interface UserRepository:BaseRepository {
+    suspend fun login(username:String,pwd:String): Result<UserData>
 }

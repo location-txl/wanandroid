@@ -1,31 +1,34 @@
 package com.location.wanandroid.viewmodel
 
+import android.os.Looper
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.location.base.Result
+import com.location.base.logDebug
+import com.location.wanandroid.data.UserData
 import com.location.wanandroid.repository.RemoteUserRep
 import com.location.wanandroid.repository.UserRepository
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
-import okhttp3.Cookie
-import java.util.concurrent.ConcurrentHashMap
 
 
 class UserViewModel : ViewModel() {
-    private val logRep:UserRepository by lazy { RemoteUserRep() }
-    val exceptionHandler = CoroutineExceptionHandler { _, exception ->
-        Log.d("UserViewModel", "Caught original $exception")
-    }
-    fun login(){
-
-        viewModelScope.launch {
-
-                val userData = logRep.login("tianxiaolong","tianxiaolong")
-                Log.d("UserViewModel",userData.toString())
+    private val logRep: UserRepository by lazy { RemoteUserRep() }
+    private val TAG = "UserViewModel"
 
 
+    fun login(): LiveData<UserData> = liveData {
 
+
+        logDebug(TAG, "isMainThread  ${Looper.getMainLooper() == Looper.myLooper()}")
+        val result = logRep.login("tianxiaolong", "tianxiaolong")
+        if (result is Result.Success) {
+            Log.d("UserViewModel", result.data.toString())
+            emit(result.data)
         }
 
+
     }
+
+
 }
+
+

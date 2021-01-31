@@ -1,3 +1,4 @@
 package com.location.wanandroid.http
 
-const val  LOGIN = "user/losgin"
+
+const val  LOGIN = "user/login"
