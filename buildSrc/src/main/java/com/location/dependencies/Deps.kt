@@ -1,5 +1,9 @@
 package com.location.dependencies
 
+import com.location.dependencies.Versions.data_store
+import com.location.dependencies.Versions.glide_version
+import com.location.dependencies.Versions.paging_version
+
 
 /**
  *
@@ -31,8 +35,14 @@ object  Versions{
     const val fragment_version = "1.2.5"
     const val navigation_version = "2.3.2"
     const val coroutines_version = "1.3.0"
+    const val data_store = "1.0.0-alpha06"
+    const val paging_version = "3.0.0-alpha13"
+    const val glide_version = "4.12.0"
 }
 
 object Deps {
-
+    const val  DATA_STORE  = "androidx.datastore:datastore-preferences:$data_store"
+    const val  PADING = "androidx.paging:paging-runtime:$paging_version"
+    const val  GLIDE = "com.github.bumptech.glide:glide:$glide_version"
+    const val  GLIDE_COMPILER = "com.github.bumptech.glide:compiler:$glide_version"
 }

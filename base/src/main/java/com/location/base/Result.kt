@@ -20,11 +20,11 @@ sealed class Result<out T> {
 
 inline fun <T> Result<T>.parseResult(
     success: (data: T) -> Unit,
-    errorBlock: (code: Int, msg: String) -> Unit
+    noinline errorBlock: ((code: Int, msg: String) -> Unit)? = null
 ) {
     when (this) {
         is Result.Success -> success(data)
-        is Result.Fail -> errorBlock(code, error.message!!)
+        is Result.Fail -> errorBlock?.invoke(code, error.message!!)
     }
 }
 

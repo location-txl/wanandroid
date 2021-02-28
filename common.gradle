@@ -14,7 +14,8 @@ android {
 
     if(AppConfig.IS_BINDING){
         buildFeatures{
-            viewBinding = true
+//            viewBinding = true
+              dataBinding = true
         }
     }
 

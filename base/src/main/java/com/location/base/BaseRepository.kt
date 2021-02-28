@@ -11,17 +11,17 @@ import java.lang.Exception
  * description：
  */
 
-suspend fun <T> BaseRepository.excutResponse(response: BaseResponse<T>):Result<T>{
-    return  coroutineScope{
+suspend inline fun <T> excutResponse(response: BaseResponse<T>):Result<T>{
+    return coroutineScope{
         if(response.isSuccess()){
             Result.Success(response.data!!)
         }else{
-            Result.Fail(IOException(response.msg))
+            Result.Fail(IOException(response.msg),response.code)
         }
     }
 }
 
-suspend fun <T> BaseRepository.safeCall(block:suspend () -> Result<T>):Result<T>{
+suspend fun <T> safeCall(block: suspend () -> Result<T>):Result<T>{
     return try {
         block()
     }catch (e:Exception) {

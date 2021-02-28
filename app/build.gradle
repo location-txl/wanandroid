@@ -1,5 +1,6 @@
 import com.location.dependencies.AppConfig
 import com.location.dependencies.Versions
+import com.location.dependencies.Deps
 
 plugins {
     id 'com.android.application'
@@ -60,6 +61,16 @@ dependencies {
     //moshi json解析 替代gson 在kotlin平台比gson好
     implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.8.0'
+
+    implementation Deps.DATA_STORE
+    implementation Deps.PADING
+    implementation Deps.GLIDE
+    //x5 内核
+    implementation 'com.tencent.tbs.tbssdk:sdk:43939'
+
+    annotationProcessor Deps.GLIDE_COMPILER
+
+
 
 
 

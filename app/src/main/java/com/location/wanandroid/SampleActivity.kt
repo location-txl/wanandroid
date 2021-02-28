@@ -10,13 +10,13 @@ import kotlinx.android.synthetic.main.activity_sample.*
  * time：2021/2/26 10:09 PM
  * description：
  */
-class SampleActivity : AppCompatActivity(R.layout.activity_sample){
+class SampleActivity : AppCompatActivity(R.layout.activity_home){
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        toogle.setOnClickListener {
-            animView.toggle()
-        }
+//        toogle.setOnClickListener {
+//            animView.toggle()
+//        }
     }
 }

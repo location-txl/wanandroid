@@ -1,5 +1,5 @@
 import com.location.dependencies.Versions
-
+import com.location.dependencies.Deps
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
@@ -29,6 +29,6 @@ android {
 
 dependencies {
     implementation "androidx.fragment:fragment-ktx:$Versions.fragment_version"
-
+    implementation Deps.DATA_STORE
 
 }

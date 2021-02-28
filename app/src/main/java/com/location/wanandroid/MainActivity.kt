@@ -1,22 +1,48 @@
 package com.location.wanandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.lifecycle.observe
+import com.location.base.BaseActivity
+import com.location.base.startNewActivity
+import com.location.base.toast
+import com.location.wanandroid.databinding.ActivityLoginBinding
+import com.location.wanandroid.view.HomeActivity
+import com.location.wanandroid.viewmodel.LoginState
 import com.location.wanandroid.viewmodel.UserViewModel
 
-class MainActivity : AppCompatActivity() {
-    private  val userModel: UserViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        Fragment
-//        supportFragmentManager.commit {
-//
-//        }
-        userModel.login()
+class MainActivity : BaseActivity<ActivityLoginBinding>() {
+    override val layoutId: Int
+        get() = R.layout.activity_login
+
+    private val userModel: UserViewModel by viewModels()
+
+    fun loginSuccess(){
+        startNewActivity<HomeActivity>()
+    }
+    fun registSuccess() {
 
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding.userModel = userModel
+
+        userModel.msgLiveData().observe(this) {
+            toast(it)
+        }
+        userModel.loginStateLiveData().observe(this) {
+            when (it) {
+                LoginState.LOGIN -> loginSuccess()
+                LoginState.REGIST -> registSuccess()
+            }
+        }
+
+
+
+
+
+    }
+
+
 }
