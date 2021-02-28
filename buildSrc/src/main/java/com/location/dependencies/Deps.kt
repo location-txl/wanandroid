@@ -2,7 +2,9 @@ package com.location.dependencies
 
 import com.location.dependencies.Versions.data_store
 import com.location.dependencies.Versions.glide_version
+import com.location.dependencies.Versions.okhttp_log_version
 import com.location.dependencies.Versions.paging_version
+import com.location.dependencies.Versions.persistentCookieJar
 
 
 /**
@@ -38,6 +40,8 @@ object  Versions{
     const val data_store = "1.0.0-alpha06"
     const val paging_version = "3.0.0-alpha13"
     const val glide_version = "4.12.0"
+    const val okhttp_log_version = "3.5.0"
+    const val persistentCookieJar = "v1.0.1"
 }
 
 object Deps {
@@ -45,4 +49,6 @@ object Deps {
     const val  PADING = "androidx.paging:paging-runtime:$paging_version"
     const val  GLIDE = "com.github.bumptech.glide:glide:$glide_version"
     const val  GLIDE_COMPILER = "com.github.bumptech.glide:compiler:$glide_version"
+    const val  OKHTTP_LOG = "com.squareup.okhttp3:logging-interceptor:$okhttp_log_version"
+    const val  COOKIE = "com.github.franmontiel:PersistentCookieJar:${persistentCookieJar}"
 }

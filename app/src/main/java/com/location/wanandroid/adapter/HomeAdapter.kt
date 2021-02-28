@@ -12,6 +12,7 @@ import com.location.wanandroid.R
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.data.HomeListDataDiff
 import com.location.wanandroid.databinding.ItemHomeBinding
+import com.location.wanandroid.widget.FavoritesView
 
 /**
  *
@@ -35,18 +36,28 @@ class HomeAdapter(private val listener: ItemClickListener) :
                 parent,
                 false
             )
-        ) { position ->
-            listener.onItemClick(getItem(position)!!, position)
-        }
+            , { position ->
+                listener.onItemClick(getItem(position)!!, position)
+            }, { position,checked,view ->
+                listener.onCollect(getItem(position)!!, position,checked,view)
+            })
     }
 }
 
-class HomeViewHolder(binding: ItemHomeBinding, private val click: (Int) -> Unit) :
+class HomeViewHolder(
+    binding: ItemHomeBinding,
+    private val click: (Int) -> Unit,
+    private val collectClick: (Int,Boolean,FavoritesView) -> Unit
+) :
     BaseViewHolder<ItemHomeBinding, HomeListData>(binding) {
     init {
 
         itemView.setOnClickListener {
             click(layoutPosition)
+        }
+        binding.collectBtn.setOnClickListener {
+            collectClick(layoutPosition,binding.collectBtn.isChecked,binding.collectBtn)
+//            binding.collectBtn.toggle()
         }
     }
 
@@ -59,5 +70,9 @@ class HomeViewHolder(binding: ItemHomeBinding, private val click: (Int) -> Unit)
 interface ItemClickListener {
 
     fun onItemClick(data: HomeListData, position: Int)
+
+    fun onCollect(data: HomeListData, position: Int,collect: Boolean,view:FavoritesView)
 }
+
+
 

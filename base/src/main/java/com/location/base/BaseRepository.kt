@@ -14,7 +14,7 @@ import java.lang.Exception
 suspend inline fun <T> excutResponse(response: BaseResponse<T>):Result<T>{
     return coroutineScope{
         if(response.isSuccess()){
-            Result.Success(response.data!!)
+            Result.Success(response.data)
         }else{
             Result.Fail(IOException(response.msg),response.code)
         }
@@ -27,6 +27,9 @@ suspend fun <T> safeCall(block: suspend () -> Result<T>):Result<T>{
     }catch (e:Exception) {
         Result.Fail(e)
     }
+}
+suspend fun <T> call(block: suspend () -> Result<T>):Result<T>{
+        return block()
 }
 
 interface BaseRepository

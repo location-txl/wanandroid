@@ -65,8 +65,10 @@ dependencies {
     implementation Deps.DATA_STORE
     implementation Deps.PADING
     implementation Deps.GLIDE
+    implementation Deps.COOKIE
     //x5 内核
     implementation 'com.tencent.tbs.tbssdk:sdk:43939'
+    implementation Deps.OKHTTP_LOG
 
     annotationProcessor Deps.GLIDE_COMPILER
 

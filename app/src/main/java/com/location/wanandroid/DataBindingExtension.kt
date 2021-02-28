@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.location.wanandroid.widget.FavoritesView
 
 /**
  *
@@ -23,4 +24,9 @@ fun loadImage(view:ImageView,url:String){
 @BindingAdapter("htmlText")
 fun htmlText(view:TextView,text:String){
     view.text = HtmlCompat.fromHtml(text,HtmlCompat.FROM_HTML_MODE_LEGACY)
+}
+
+@BindingAdapter("favorChecked")
+fun checked(view:FavoritesView,checked:Boolean){
+    view.setState(checked)
 }

@@ -22,7 +22,7 @@ class FavoritesView @JvmOverloads constructor(
     private val animator = ObjectAnimator.ofFloat(this, "proportion", 0f, 1f).apply {
         duration = ANIMATOR_DURATION
     }
-    private var proportion = 0f
+    private var proportion = 1.0f
         set(value) {
             field = value
             invalidate()
@@ -66,24 +66,39 @@ class FavoritesView @JvmOverloads constructor(
         setMeasuredDimension(size, size)
     }
 
-    override fun isChecked() = checked
-
-    override fun toggle() {
-        checked = !checked
-        if(animator.isRunning){
-            animator.pause()
-        }
-        if (checked) {
-            animator.start()
-        } else {
-            animator.reverse()
+    private fun changeState(checked:Boolean,showAnim:Boolean){
+        this.checked = checked
+        if(showAnim){
+            if(animator.isRunning){
+                animator.pause()
+            }
+            if (checked) {
+                animator.start()
+            } else {
+                animator.reverse()
+            }
+        }else{
+            proportion = if(checked){
+                1.0f
+            }else{
+                0.0f
+            }
+            invalidate()
         }
     }
 
+    override fun isChecked() = checked
+
+    override fun toggle() {
+        changeState(!checked,true)
+    }
+
     override fun setChecked(checked: Boolean) {
-        if (checked != this.checked) {
             toggle()
-        }
+    }
+
+    fun setState(checked:Boolean){
+            changeState(checked,false)
     }
 
 }

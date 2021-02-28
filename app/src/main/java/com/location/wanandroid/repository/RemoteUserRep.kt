@@ -1,16 +1,23 @@
 package com.location.wanandroid.repository
 
-import com.location.base.Result
-import com.location.base.excutResponse
-import com.location.base.safeCall
+import com.location.base.*
 import com.location.wanandroid.RetrofitUtils
 import com.location.wanandroid.data.UserData
-import com.location.wanandroid.http.LoginService
+import com.location.wanandroid.http.UserService
 
-class RemoteUserRep:UserRepository {
-    private  val service by lazy { RetrofitUtils.create(LoginService::class.java)}
+class RemoteUserRep : UserRepository {
+    private val service by lazy { RetrofitUtils.create(UserService::class.java) }
 
     override suspend fun login(username: String, pwd: String): Result<UserData> {
-        return  safeCall { excutResponse(service.login(username, pwd)) }
+        return safeCall { excutResponse(service.login(username, pwd)) }
     }
+
+    override suspend fun collectArticle(id: Long): Result<EmptyData> {
+        return call { excutResponse(service.collectArticle(id)) }
+    }
+    override suspend fun unCollectArticle(id: Long): Result<EmptyData> {
+        return call { excutResponse(service.unCollectArticle(id)) }
+    }
+
+
 }

@@ -14,7 +14,10 @@ import java.lang.Exception
 sealed class Result<out T> {
     fun isSuccess(): Boolean = this is Success
     fun isFail(): Boolean = this is Fail
-    data class Success<out T>(val data: T) : Result<T>()
+    data class Success<out T>(val outData: T?) : Result<T>(){
+        val data:T
+        get() = outData!!
+    }
     data class Fail(val error: Exception, val code: Int = -1) : Result<Nothing>()
 }
 

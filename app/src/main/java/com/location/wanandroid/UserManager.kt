@@ -2,6 +2,7 @@ package com.location.wanandroid
 
 import android.text.TextUtils
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.createDataStore
@@ -19,6 +20,7 @@ object UserManager {
 
     private val USER_NAME = stringPreferencesKey("user_name")
     private val USER_PWD = stringPreferencesKey("user_pwd")
+    private val USER_IS_LOGIN  = booleanPreferencesKey("user_is_login")
     private val userDataStore  by lazy { appContext.createDataStore( name = NAME) }
 
 
@@ -26,6 +28,7 @@ object UserManager {
         userDataStore.edit {
             it[USER_NAME] = userName
             it[USER_PWD] = userPwd
+            it[USER_IS_LOGIN] = true
         }
     }
 
@@ -44,6 +47,10 @@ object UserManager {
         } else {
             data
         }
+    }
+
+    suspend fun isLogin():Boolean{
+        return  userDataStore.getData(USER_IS_LOGIN,false)
     }
 
 }

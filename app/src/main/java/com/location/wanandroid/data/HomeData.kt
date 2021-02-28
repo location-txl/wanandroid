@@ -73,7 +73,7 @@ data class HomeListData(
     @Json(name = "host")
     val host: String,
     @Json(name = "id")
-    val id: Int,
+    val id: Long,
     @Json(name = "link")
     val link: String,
     @Json(name = "niceDate")

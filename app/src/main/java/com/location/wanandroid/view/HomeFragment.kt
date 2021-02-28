@@ -10,14 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.location.base.BaseFragment
+import com.location.base.logDebug
 import com.location.base.startNewActivity
+import com.location.wanandroid.MainActivity
 import com.location.wanandroid.R
+import com.location.wanandroid.UserManager
 import com.location.wanandroid.adapter.HomeAdapter
 import com.location.wanandroid.adapter.ItemClickListener
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.databinding.FragmentHomeBinding
 import com.location.wanandroid.view.DetailsActivity.Companion.KEY_URL
 import com.location.wanandroid.viewmodel.HomeViewModel
+import com.location.wanandroid.widget.FavoritesView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -28,6 +32,7 @@ import kotlinx.coroutines.launch
  * description：
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), ItemClickListener {
+    private val TAG = "HomeFragment"
     override val layoutId: Int
         get() = R.layout.fragment_home
 
@@ -47,6 +52,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), ItemClickListener {
     override fun onItemClick(data: HomeListData, position: Int) {
         val bundle = bundleOf(KEY_URL to data.link)
         startNewActivity<DetailsActivity>(bundle)
+    }
+
+    override fun onCollect(data: HomeListData, position: Int,checked:Boolean,view:FavoritesView) {
+          lifecycleScope.launch {
+              if(!UserManager.isLogin()){
+                  startNewActivity<MainActivity>()
+                  return@launch
+              }
+              val collect = homeModel.collect(data.id,!checked)
+              logDebug(TAG,"collect_result$collect")
+              if(collect){
+                  view.toggle()
+              }
+          }
     }
 
 }
