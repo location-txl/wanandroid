@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Checkable
 import androidx.core.graphics.withClip
+import androidx.core.graphics.withSave
 import kotlin.math.min
 
 private const val ANIMATOR_DURATION = 1000L
@@ -31,8 +32,8 @@ class FavoritesView @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        size = width.toFloat() / 8 * 7
-        heartSize = width.toFloat() / 8 * 4
+        size = (width - paddingLeft - paddingRight).toFloat() / 8 * 7
+        heartSize = (width - paddingLeft - paddingRight).toFloat() / 8 * 4
         rect.set(0f, 0f, heartSize*2, size)
         path.apply {
             reset()
@@ -50,7 +51,9 @@ class FavoritesView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        canvas.withClip(path) {
+        canvas.withSave {
+            translate(paddingLeft.toFloat(),paddingTop.toFloat())
+            clipPath(path)
             paint.style = Paint.Style.STROKE
             canvas.drawPath(path, paint)
             paint.style = Paint.Style.FILL

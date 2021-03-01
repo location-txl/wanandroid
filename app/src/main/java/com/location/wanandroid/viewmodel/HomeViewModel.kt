@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
 import com.location.wanandroid.padingsource.HomeSource
+import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.repository.RemoteHomeRep
 import com.location.wanandroid.repository.RemoteUserRep
 import kotlinx.coroutines.async
@@ -19,12 +20,19 @@ import kotlinx.coroutines.launch
  * description：
  */
 class HomeViewModel: BaseViewModel() {
-    val homeRep  by lazy { RemoteHomeRep() }
-    val userRep  by lazy { RemoteUserRep() }
+    private val homeRep  by lazy { RemoteHomeRep() }
+    private val userRep  by lazy { RemoteUserRep() }
+
     val homeFlow = Pager(
         PagingConfig(pageSize = 20)
     ){
-        HomeSource(homeRep)
+        HomeSource(homeRep,HomeSourceType.HOME_DATA)
+    }.flow.cachedIn(viewModelScope)
+
+    val qaFlow = Pager(
+        PagingConfig(pageSize = 20)
+    ){
+        HomeSource(homeRep,HomeSourceType.QA_DATA)
     }.flow.cachedIn(viewModelScope)
 
 

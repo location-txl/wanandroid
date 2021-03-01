@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.location.base.Result
 import com.location.base.logDebug
+import com.location.wanandroid.data.HomeData
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.repository.HomeRepository
 import kotlin.random.Random
@@ -14,13 +15,20 @@ import kotlin.random.Random
  * time：2021/2/27 11:10 PM
  * description：
  */
-class HomeSource(val homeRep: HomeRepository): PagingSource<Int, HomeListData>() {
+class HomeSource(private val homeRep: HomeRepository,private val type:HomeSourceType): PagingSource<Int, HomeListData>() {
     private val TAG = "HomeSource"
     override fun getRefreshKey(state: PagingState<Int, HomeListData>): Int? {
         logDebug(TAG,"getRefreshKey")
         return 0
     }
 
+
+    private suspend fun loadData(loadIndex:Int):Result<HomeData>{
+        return when(type){
+            HomeSourceType.HOME_DATA -> homeRep.loadHomeData(loadIndex)
+            HomeSourceType.QA_DATA   -> homeRep.loadQAData(loadIndex)
+        }
+    }
     /**
      * paging3加载数据
      */
@@ -29,7 +37,7 @@ class HomeSource(val homeRep: HomeRepository): PagingSource<Int, HomeListData>()
         val loadIndex = params.key?:0
 
         logDebug(TAG,"load loadIndex=$loadIndex")
-        return when(val response = homeRep.loadHomeData(loadIndex)){
+        return when(val response = loadData(loadIndex)){
             is Result.Success -> LoadResult.Page(
                 data = response.data.datas,
                 prevKey = null,
@@ -37,14 +45,9 @@ class HomeSource(val homeRep: HomeRepository): PagingSource<Int, HomeListData>()
             )
             is Result.Fail -> LoadResult.Error(response.error)
         }
-//       response.parseResult({
-//           return LoadResult.Page(
-//               data = it.datas,
-//               prevKey = loadIndex,
-//              nextKey = loadIndex+1
-//           )
-//       },{_,msg->
-//           return@parseResult LoadResult.Error<Int, HomeListData>(IOException())
-//       })
     }
+}
+enum class HomeSourceType{
+    HOME_DATA,
+    QA_DATA,
 }

@@ -12,6 +12,7 @@ import com.location.wanandroid.data.HomeData
  */
 interface HomeRepository : BaseRepository {
     suspend fun  loadHomeData(index:Int):Result<HomeData>
+    suspend fun  loadQAData(index:Int):Result<HomeData>
 
 
 }

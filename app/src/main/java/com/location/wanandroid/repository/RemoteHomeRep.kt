@@ -18,4 +18,8 @@ class RemoteHomeRep:HomeRepository {
     override suspend fun loadHomeData(index: Int): Result<HomeData> {
        return safeCall { excutResponse(service.homeList(index)) }
     }
+
+    override suspend fun loadQAData(index: Int): Result<HomeData> {
+        return safeCall { excutResponse(service.qAList(index)) }
+    }
 }
