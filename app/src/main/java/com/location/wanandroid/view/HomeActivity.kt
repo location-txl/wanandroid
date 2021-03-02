@@ -26,12 +26,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //设置缓存为4个
+        binding.homeViewpager.offscreenPageLimit = 4
         binding.homeViewpager.adapter = HomeFragmentAdapter(
             supportFragmentManager, mutableListOf(
                 createHomeFragment(HomeSourceType.HOME_DATA),
                 createHomeFragment(HomeSourceType.QA_DATA),
                 createHomeFragment(HomeSourceType.QA_DATA),
-                createHomeFragment(HomeSourceType.QA_DATA)
+                MeSettingFragment()
             )
         )
         binding.homeViewpager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
