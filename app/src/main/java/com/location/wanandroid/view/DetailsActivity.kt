@@ -6,8 +6,8 @@ import com.location.base.BaseActivity
 import com.location.wanandroid.R
 import com.location.wanandroid.databinding.ActivityDetailsBinding
 import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
-import com.tencent.smtt.sdk.WebViewClient
 
 /**
  *
@@ -37,6 +37,23 @@ class DetailsActivity: BaseActivity<ActivityDetailsBinding>() {
         intent.getStringExtra(KEY_URL)?.let {
             binding.webView.loadUrl(it)
         }
+
+        val webSetting: WebSettings = binding.webView.settings
+        val mUserAgentString = webSetting.userAgentString
+        webSetting.javaScriptEnabled = true
+        webSetting.javaScriptCanOpenWindowsAutomatically = false
+        webSetting.allowFileAccess = true
+        webSetting.layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS
+        webSetting.setSupportZoom(false)
+        webSetting.builtInZoomControls = false
+        webSetting.useWideViewPort = true
+        webSetting.loadWithOverviewMode = true
+        webSetting.setAppCacheEnabled(true)
+        webSetting.domStorageEnabled = true
+        webSetting.setGeolocationEnabled(true)
+        webSetting.setAppCacheMaxSize(Long.MAX_VALUE)
+        webSetting.pluginState = WebSettings.PluginState.ON_DEMAND
+        webSetting.cacheMode = WebSettings.LOAD_DEFAULT
 
     }
 

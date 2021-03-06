@@ -44,9 +44,9 @@ class HomeViewModel: BaseViewModel() {
                 userRep.unCollectArticle(id)
             collectArticle.isSuccess()
         }
-
         return async.await()
     }
+
 
 
 }

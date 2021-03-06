@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
        <variable
            name="userManager"
            type="com.location.wanandroid.UserManager" />
+        <variable
+            name="userInfo"
+            type="com.location.wanandroid.view.MeSettingFragment.SettingUser" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +19,7 @@
         android:background="#673AB7">
 
         <ImageView
+            android:visibility="@{userInfo.login ? View.VISIBLE : View.GONE}"
             android:id="@+id/imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -24,6 +29,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{userInfo.userHead}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -33,7 +39,7 @@
             android:layout_marginTop="28dp"
             android:padding="5dp"
             android:text="去登陆"
-            android:visibility="gone"
+            android:visibility="@{userInfo.login ? View.GONE : View.VISIBLE}"
             android:textColor="@color/white"
             android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:text="等级12"
+            android:visibility="@{userInfo.login ? View.VISIBLE : View.GONE}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintHorizontal_bias="0.85"
@@ -67,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:text="等级12"
+            android:visibility="@{userInfo.login ? View.VISIBLE : View.GONE}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.114"
@@ -74,11 +82,12 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
+            android:visibility="@{userInfo.login ? View.VISIBLE : View.GONE}"
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="userName"
+            android:text="@{userInfo.userName}"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"

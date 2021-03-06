@@ -1,7 +1,9 @@
 package com.location.base
 
+import com.location.base.livedata.ActiveLiveData
+
 object StatusManager {
-    val loadingLiveData:ActiveLiveData<LoadingStatus> = ActiveLiveData()
+    val loadingLiveData: ActiveLiveData<LoadingStatus> = ActiveLiveData()
 }
 
 enum class LoadingStatus{

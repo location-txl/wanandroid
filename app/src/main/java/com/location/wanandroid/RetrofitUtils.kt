@@ -11,6 +11,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitUtils {
     private const val BASE_URL = "https://wanandroid.com/"
+    val cookieManager by lazy {
+        PersistentCookieJar(
+            SetCookieCache(), SharedPrefsCookiePersistor(
+                appContext
+            )
+        )
+    }
     private val retrofit: Retrofit by lazy {
 
         Retrofit.Builder()
@@ -19,12 +26,17 @@ object RetrofitUtils {
                 baseUrl(BASE_URL)
                     .client(
                         OkHttpClient.Builder()
-                            .cookieJar(PersistentCookieJar(SetCookieCache(),SharedPrefsCookiePersistor(
-                                appContext)))
-                            .addNetworkInterceptor(HttpLoggingInterceptor(HttpLog()).apply {
-                                level = HttpLoggingInterceptor.Level.BODY
-                            })
-                            .build()
+                            .cookieJar(cookieManager)
+                            .run {
+                                if (BuildConfig.DEBUG) {
+                                    addNetworkInterceptor(HttpLoggingInterceptor(HttpLog()).apply {
+                                        level = HttpLoggingInterceptor.Level.BODY
+                                    })
+                                }
+
+                                build()
+                            }
+
                     )
                 build()
             }
@@ -34,10 +46,11 @@ object RetrofitUtils {
 
     fun <T> create(clazz: Class<T>): T = retrofit.create(clazz)
 }
-class HttpLog:HttpLoggingInterceptor.Logger{
+
+class HttpLog : HttpLoggingInterceptor.Logger {
     override fun log(message: String?) {
         message?.let {
-            logDebug("HttpLog",it)
+            logDebug("HttpLog", it)
         }
     }
 

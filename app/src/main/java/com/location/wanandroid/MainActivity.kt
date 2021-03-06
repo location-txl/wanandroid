@@ -17,10 +17,11 @@ class MainActivity : BaseActivity<ActivityLoginBinding>() {
 
     private val userModel: UserViewModel by viewModels()
 
-    fun loginSuccess(){
-        startNewActivity<HomeActivity>()
+    private fun loginSuccess(){
+        finish()
     }
-    fun registSuccess() {
+
+    private fun registSuccess() {
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {

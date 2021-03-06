@@ -3,10 +3,7 @@ package com.location.wanandroid.http
 import com.location.base.EmptyData
 import com.location.wanandroid.data.WanResponse
 import com.location.wanandroid.data.UserData
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface UserService {
     @FormUrlEncoded
@@ -37,5 +34,21 @@ interface UserService {
      */
     @POST("lg/uncollect_originId/{collectId}/json")
     suspend fun unCollectArticle(@Path("collectId") id: Long): WanResponse<EmptyData>
+
+
+    /**
+     * 退出登陆
+     *
+     */
+    @GET("user/logout/json")
+    suspend fun unLogout(): WanResponse<EmptyData>
+
+
+    /**
+     *
+     */
+    @GET("lg/collect/list/{path}/json")
+    suspend fun  getCollectList(@Path("path") index:Int)
+
 
 }

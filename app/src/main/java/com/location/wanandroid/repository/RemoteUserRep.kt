@@ -19,5 +19,9 @@ class RemoteUserRep : UserRepository {
         return call { excutResponse(service.unCollectArticle(id)) }
     }
 
+    override suspend fun unLogout(): Result<EmptyData> {
+        return call { excutResponse(service.unLogout()) }
+    }
+
 
 }

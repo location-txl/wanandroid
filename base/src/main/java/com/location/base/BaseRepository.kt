@@ -11,6 +11,7 @@ import java.lang.Exception
  * description：
  */
 
+
 suspend inline fun <T> excutResponse(response: BaseResponse<T>):Result<T>{
     return coroutineScope{
         if(response.isSuccess()){
@@ -24,7 +25,8 @@ suspend inline fun <T> excutResponse(response: BaseResponse<T>):Result<T>{
 suspend fun <T> safeCall(block: suspend () -> Result<T>):Result<T>{
     return try {
         block()
-    }catch (e:Exception) {
+    }catch (e:IOException) {
+        logDebug(msg = "safe call error ${e.message}")
         Result.Fail(e)
     }
 }

@@ -1,4 +1,4 @@
-package com.location.base
+package com.location.base.livedata
 
 import androidx.lifecycle.LiveData
 
@@ -8,6 +8,7 @@ class ActiveLiveData<T>:LiveData<T>() {
         if(active){
             super.postValue(value)
         }
+
     }
 
     override fun setValue(value: T) {

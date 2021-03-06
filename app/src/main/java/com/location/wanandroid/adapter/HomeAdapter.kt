@@ -38,8 +38,8 @@ class HomeAdapter(private val listener: ItemClickListener) :
             )
             , { position ->
                 listener.onItemClick(getItem(position)!!, position)
-            }, { position,checked,view ->
-                listener.onCollect(getItem(position)!!, position,checked,view)
+            }, { position, checked, view ->
+                listener.onCollect(getItem(position)!!, position, checked, view)
             })
     }
 }
@@ -47,7 +47,7 @@ class HomeAdapter(private val listener: ItemClickListener) :
 class HomeViewHolder(
     binding: ItemHomeBinding,
     private val click: (Int) -> Unit,
-    private val collectClick: (Int,Boolean,FavoritesView) -> Unit
+    private val collectClick: (Int, Boolean, FavoritesView) -> Unit
 ) :
     BaseViewHolder<ItemHomeBinding, HomeListData>(binding) {
     init {
@@ -56,8 +56,7 @@ class HomeViewHolder(
             click(layoutPosition)
         }
         binding.collectBtn.setOnClickListener {
-            collectClick(layoutPosition,binding.collectBtn.isChecked,binding.collectBtn)
-//            binding.collectBtn.toggle()
+            collectClick(layoutPosition, binding.collectBtn.isChecked, binding.collectBtn)
         }
     }
 
@@ -71,7 +70,7 @@ interface ItemClickListener {
 
     fun onItemClick(data: HomeListData, position: Int)
 
-    fun onCollect(data: HomeListData, position: Int,collect: Boolean,view:FavoritesView)
+    fun onCollect(data: HomeListData, position: Int, collect: Boolean, view: FavoritesView)
 }
 
 

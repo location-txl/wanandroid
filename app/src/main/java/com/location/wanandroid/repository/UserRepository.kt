@@ -9,4 +9,5 @@ interface UserRepository:BaseRepository {
     suspend fun login(username:String,pwd:String): Result<UserData>
     suspend fun collectArticle( id:Long): Result<EmptyData>
     suspend fun unCollectArticle( id:Long): Result<EmptyData>
+    suspend fun unLogout():Result<EmptyData>
 }

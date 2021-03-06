@@ -39,8 +39,14 @@ fun logDebug(tag: String? = null, msg: String) {
     }
 }
 
+
+
 fun Activity.toast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.toast(msg:String){
+    Toast.makeText(requireContext(),msg,Toast.LENGTH_SHORT).show()
 }
 
 suspend fun <T> DataStore<Preferences>.getData(key: Preferences.Key<T>, defaultValue: T): T {
@@ -53,6 +59,10 @@ inline fun <reified T : Activity> Activity.startNewActivity(bundle: Bundle = Bun
     startActivity(Intent(this, T::class.java).apply {
         putExtras(bundle)
     })
+}
+
+inline fun <reified T : Activity> Activity.startNew2Activity(block:Intent.() -> Intent = { this }) {
+    startActivity(Intent(this, T::class.java).block())
 }
 
 inline fun <reified T : Activity> Fragment.startNewActivity(bundle: Bundle = Bundle()) {
