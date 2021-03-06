@@ -30,6 +30,7 @@
         <!--        <activity android:name=".view.HomeActivity"/>-->
         <activity android:name=".view.DetailsActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".view.collect.CollectActivity"/>
 
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"

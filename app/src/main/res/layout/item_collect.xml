@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.location.wanandroid.data.CollectArticleItem" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/remove_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="取消收藏" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_toLeftOf="@id/remove_collect"
+            android:paddingRight="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            htmlText="@{data.title}"
+            android:textColor="@color/black"
+            tools:text="Gradle系列之从零搭建Maven私服库" />
+
+        <TextView
+            android:id="@+id/typeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:text="@{data.chapterName}"
+            android:layout_marginBottom="10dp"
+            tools:text="自助" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/typeView"
+            android:text="@{data.niceDate}"
+            android:layout_marginBottom="10dp"
+            tools:text="1小时前" />
+    </RelativeLayout>
+</layout>

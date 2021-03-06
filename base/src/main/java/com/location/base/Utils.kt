@@ -55,19 +55,17 @@ suspend fun <T> DataStore<Preferences>.getData(key: Preferences.Key<T>, defaultV
     }.first()
 }
 
-inline fun <reified T : Activity> Activity.startNewActivity(bundle: Bundle = Bundle()) {
+inline fun <reified T : Activity> Activity.startNewActivity(block: Intent.() -> Unit = {}) {
     startActivity(Intent(this, T::class.java).apply {
-        putExtras(bundle)
+        block()
     })
 }
 
-inline fun <reified T : Activity> Activity.startNew2Activity(block:Intent.() -> Intent = { this }) {
-    startActivity(Intent(this, T::class.java).block())
-}
 
-inline fun <reified T : Activity> Fragment.startNewActivity(bundle: Bundle = Bundle()) {
+
+inline fun <reified T : Activity> Fragment.startNewActivity(block: Intent.() -> Unit = {}) {
     startActivity(Intent(requireActivity(), T::class.java).apply {
-        putExtras(bundle)
+        block()
     })
 }
 

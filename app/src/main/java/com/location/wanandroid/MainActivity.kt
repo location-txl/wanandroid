@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.location.base.BaseActivity
-import com.location.base.startNewActivity
 import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
-import com.location.wanandroid.view.HomeActivity
 import com.location.wanandroid.viewmodel.LoginState
 import com.location.wanandroid.viewmodel.UserViewModel
 

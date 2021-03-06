@@ -3,6 +3,7 @@ package com.location.wanandroid.http
 import com.location.base.EmptyData
 import com.location.wanandroid.data.WanResponse
 import com.location.wanandroid.data.UserData
+import com.location.wanandroid.data.WanCollectArticle
 import retrofit2.http.*
 
 interface UserService {
@@ -45,10 +46,12 @@ interface UserService {
 
 
     /**
-     *
+     *获取收藏文章列表
      */
     @GET("lg/collect/list/{path}/json")
-    suspend fun  getCollectList(@Path("path") index:Int)
+    suspend fun  getCollectList(@Path("path") index:Int):WanCollectArticle
+
+
 
 
 }

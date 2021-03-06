@@ -9,6 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
  * time：2021/2/27 11:49 PM
  * description：
  */
-abstract class BaseViewHolder<D:ViewDataBinding,T>(val binding:D) :RecyclerView.ViewHolder(binding.root){
+abstract class BaseViewHolder<V:ViewDataBinding,T>(val binding:V) :RecyclerView.ViewHolder(binding.root){
     abstract fun onBind(data:T)
 }

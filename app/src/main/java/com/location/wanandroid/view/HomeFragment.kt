@@ -70,8 +70,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), ItemClickListener {
     }
 
     override fun onItemClick(data: HomeListData, position: Int) {
-        val bundle = bundleOf(KEY_URL to data.link)
-        startNewActivity<DetailsActivity>(bundle)
+
+        startNewActivity<DetailsActivity>{
+            putExtras(bundleOf(KEY_URL to data.link))
+        }
     }
 
     override fun onCollect(

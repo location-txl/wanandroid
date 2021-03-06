@@ -11,11 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
-import com.location.base.BaseFragment
-import com.location.base.BaseViewHolder
+import com.location.base.*
 import com.location.base.livedata.EventObserver
-import com.location.base.logDebug
-import com.location.base.toast
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.UserManager
@@ -25,6 +22,7 @@ import com.location.wanandroid.data.UserData
 import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
 import com.location.wanandroid.databinding.ItemUserinfoBinding
+import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
@@ -38,6 +36,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener
 
     companion object {
         private const val LOGOUT_POSITION = 6
+        private const val COLLECT_POSITION = 2
     }
 
     private val model: UserViewModel by activityViewModels()
@@ -205,6 +204,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener
                     }
                 })
             }
+            COLLECT_POSITION -> startNewActivity<CollectActivity>()
         }
     }
 

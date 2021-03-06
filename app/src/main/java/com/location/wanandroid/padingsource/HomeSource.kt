@@ -7,7 +7,6 @@ import com.location.base.logDebug
 import com.location.wanandroid.data.HomeData
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.repository.HomeRepository
-import kotlin.random.Random
 
 /**
  *

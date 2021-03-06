@@ -4,31 +4,14 @@ import com.squareup.moshi.JsonClass
 
 import com.squareup.moshi.Json
 
+typealias HomeData = PageData<HomeListData>
 
 /**
  *
  * @author tianxiaolong
  * time：2021/2/27 11:13 PM
  * description：
- */@JsonClass(generateAdapter = true)
-data class HomeData(
-    @Json(name = "curPage")
-    val curPage: Int,
-    @Json(name = "datas")
-    val datas: List<HomeListData>,
-    @Json(name = "offset")
-    val offset: Int,
-    @Json(name = "over")
-    val over: Boolean,
-    @Json(name = "pageCount")
-    val pageCount: Int,
-    @Json(name = "size")
-    val size: Int,
-    @Json(name = "total")
-    val total: Int
-)
-
-
+ */
 class HomeListDataDiff: DiffUtil.ItemCallback<HomeListData>() {
     override fun areItemsTheSame(oldItem: HomeListData, newItem: HomeListData) = oldItem.id == newItem.id
 
