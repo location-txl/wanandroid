@@ -6,28 +6,36 @@ import design.zerenlian.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChinClient implements Chin{
+public class ChinClient implements Interceptor.Chain {
 
-    private List<Chin> chinList = new ArrayList<>();
+    private List<Interceptor> interceptorList = new ArrayList<>();
 
-    public void addHandler(Chin chin){
-        chinList.add(chin);
+    public void addInterceptor(Interceptor interceptor) {
+        interceptorList.add(interceptor);
     }
-    private  int index = 0;
+
+    private int index = 0;
+
+
+    public void removeInterceptor(Interceptor interceptor) {
+        interceptorList.remove(interceptor);
+    }
+
+
+    private Request request;
+
     @Override
-    public Response handleEvent(Request request, Chin chin) {
-        if(index >= chinList.size()){
+    public Request getRequest() {
+        return request;
+    }
+
+    @Override
+    public Response proceed(Request request) {
+        this.request = request;
+        if (index >= interceptorList.size()) {
             return null;
         }
-        Chin nextChin = chinList.get(index++);
-        return nextChin.handleEvent(request,chin);
-    }
-
-    public void removeHandler(Chin chin){
-        chinList.remove(chin);
-    }
-
-    public synchronized Response handler(Request request){
-        return  handleEvent(request,this);
+        Interceptor interceptor = interceptorList.get(index++);
+        return interceptor.intercept(this);
     }
 }

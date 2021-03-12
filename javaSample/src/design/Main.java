@@ -5,9 +5,9 @@ import design.daili.ProxyFactory;
 import design.daili.BannerServiceImpl;
 import design.zerenlian.Request;
 import design.zerenlian.Response;
-import design.zerenlian.sample.java.AChin;
-import design.zerenlian.sample.java.BChin;
-import design.zerenlian.sample.java.CChin;
+import design.zerenlian.sample.java.AInterceptor;
+import design.zerenlian.sample.java.BInterceptor;
+import design.zerenlian.sample.java.CInterceptor;
 import design.zerenlian.sample.java.ChinClient;
 import org.junit.Test;
 
@@ -20,11 +20,11 @@ public class Main {
     @Test
     public void testZeRenLian(){
         ChinClient client = new ChinClient();
-        client.addHandler(new AChin());
-        client.addHandler(new BChin());
-        client.addHandler(new CChin());
-        Response response = client.handler(new Request("拦截器", 260));
-        System.out.println(response.getTitle());
+        client.addInterceptor(new AInterceptor());
+        client.addInterceptor(new BInterceptor());
+        client.addInterceptor(new CInterceptor());
+        Response response = client.proceed(new Request("拦截器", 260));
+        System.out.println(response.getBody());
     }
 
     /**
