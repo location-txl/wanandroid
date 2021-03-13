@@ -2,7 +2,7 @@ package design;
 
 import design.daili.ShopStore;
 import design.daili.ProxyFactory;
-import design.daili.BannerServiceImpl;
+import design.daili.BannerShopStore;
 import design.zerenlian.Request;
 import design.zerenlian.Response;
 import design.zerenlian.sample.java.AInterceptor;
@@ -33,7 +33,7 @@ public class Main {
     @Test
     public void daili() {
         ProxyFactory proxy = new ProxyFactory();
-        ShopStore shopStore = new BannerServiceImpl();
+        ShopStore shopStore = new BannerShopStore();
         ShopStore proxyService = proxy.createProxy(shopStore);
         proxyService.payBanner(3);
         ShopStore shopStoreProxy = proxy.createShopStoreProxy(shopStore);

@@ -54,6 +54,7 @@ public class ProxyFactory {
                     }
                     Integer money = (Integer) method.invoke(shopStore, args);
                     if (isDiscount()) {
+                        System.out.println("是节假日 原价为" + money + "打8折");
                         //如果是节假日 对商品进行打折
                         money = (int) (money * 0.8);
                     }

@@ -1,6 +1,6 @@
 package design.daili;
 
-public class BannerServiceImpl implements ShopStore {
+public class BannerShopStore implements ShopStore {
 
     /**
      * 单价
