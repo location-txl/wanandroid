@@ -1,9 +1,16 @@
 package com.location.wanandroid.http
 
+import androidx.lifecycle.LiveData
 import com.location.base.EmptyData
+import com.location.base.Result
 import com.location.wanandroid.data.WanResponse
 import com.location.wanandroid.data.UserData
 import com.location.wanandroid.data.WanCollectArticle
+import com.location.wanandroid.http.factory.HttpLiveData
+import io.reactivex.Single
+import okhttp3.Response
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface UserService {
@@ -52,6 +59,27 @@ interface UserService {
     suspend fun  getCollectList(@Path("path") index:Int):WanCollectArticle
 
 
+    @FormUrlEncoded
+    @POST(LOGIN)
+    fun loginForLiveData(
+        @Field("username") userName: String,
+        @Field("password") pwd: String
+    ): HttpLiveData<WanResponse<UserData>>
 
+
+
+    @FormUrlEncoded
+    @POST(LOGIN)
+    fun loginForCall(
+        @Field("username") userName: String,
+        @Field("password") pwd: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST(LOGIN)
+    fun loginForRxJava(
+        @Field("username") userName: String,
+        @Field("password") pwd: String
+    ): Single<ResponseBody>
 
 }
