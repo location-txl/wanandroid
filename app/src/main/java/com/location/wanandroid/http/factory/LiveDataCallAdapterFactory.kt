@@ -46,7 +46,7 @@ class LiveDataCallAdapterFactory private constructor(private val autoCancel: Boo
     }
 
 
-    class LiveDataCallAdapter<T>(private val delegate: Call<T>, private val autoCancel) :
+    class LiveDataCallAdapter<T>(private val delegate: Call<T>, private val autoCancel:Boolean) :
         HttpLiveData<T>() {
         override fun onActive() {
             super.onActive()
@@ -77,7 +77,7 @@ class LiveDataCallAdapterFactory private constructor(private val autoCancel: Boo
         }
 
         override fun clone(): HttpLiveData<T> {
-            return LiveDataCallAdapter(delegate.clone())
+            return LiveDataCallAdapter(delegate.clone(),autoCancel)
         }
     }
 
