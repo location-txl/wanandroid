@@ -11,6 +11,16 @@ plugins {
 
 }
 apply from: "../common.gradle"
+
+static def appName() {
+    return "WanAndroid"
+}
+
+static def buildTime() {
+    return new Date().format('YYYY-MM-dd', TimeZone.getTimeZone('GMT+08:00'))
+}
+
+
 android {
 
 
@@ -25,7 +35,18 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${appName()}-${buildType.name}-v${defaultConfig.versionName}-${defaultConfig.versionCode}-${buildTime()}.apk"
+                }
+            }
+
+            // signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
