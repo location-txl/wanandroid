@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.KITKAT
 import android.os.Bundle
@@ -68,6 +69,31 @@ inline fun <reified T : Activity> Fragment.startNewActivity(block: Intent.() -> 
         block()
     })
 }
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun <T : Any> assertNotNull(value: T?) {
+
+    if (BuildConfig.DEBUG) {
+        requireNotNull(value)
+    }
+}
+
+inline fun <T : Any> assertNotNull(value: T?, message: () -> String) {
+
+    if (BuildConfig.DEBUG) {
+        requireNotNull(value) {
+            message()
+        }
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun assertBoolean(value:Boolean, noinline message: (() -> String) = {"assertBoolean value is false"}){
+    if(BuildConfig.DEBUG && !value){
+        throw IllegalArgumentException(message())
+    }
+}
+
 
 
 fun fixInputMethodManagerLeak(context: Context) {
