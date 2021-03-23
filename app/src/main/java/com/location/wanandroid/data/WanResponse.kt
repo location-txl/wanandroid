@@ -16,7 +16,7 @@ import com.squareup.moshi.JsonClass
  * "data":"密码错误"
  * }
  */
-private const val ERROR_CODE = -1
+private const val ERROR_CODE_LEVEL = 0
 
 @JsonClass(generateAdapter = true)
 data class WanResponse<out T>(
@@ -27,7 +27,7 @@ data class WanResponse<out T>(
     @Json(name = "data")
     override val data: T?
 ) : BaseResponse<T> {
-    override fun isSuccess() = errorCode != ERROR_CODE
+    override fun isSuccess() = errorCode >= ERROR_CODE_LEVEL
 
     override val code: Int
         get() = errorCode
