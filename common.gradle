@@ -1,5 +1,13 @@
 /**
  * 通用的gradle配置 所有的modle app都需要依赖此gradle
+ *  默认引用
+ *  kotlin-stdlib
+ *  core-ktx
+ *  appcompat
+ *  material
+ *  test
+ *  startup
+ *  kotlinx-coroutines
  */
 
 import com.location.dependencies.*
@@ -31,15 +39,15 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$Versions.kotlin"
     implementation "androidx.core:core-ktx:$Versions.core_ktx_version"
     implementation "androidx.appcompat:appcompat:$Versions.appcompat_version"
     implementation "com.google.android.material:material:$Versions.material_version"
-    testImplementation "junit:junit:$Versions.junit_vrsion"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    testImplementation "junit:junit:$Versions.junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$Versions.android_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$Versions.espresso_core_version"
+    //startup jectack 启动组件
     implementation  "androidx.startup:startup-runtime:$Versions.startup_version"
-
     //协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$Versions.coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$Versions.coroutines_version"

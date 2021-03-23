@@ -6,6 +6,12 @@ import com.location.dependencies.Versions.leakCanary_version
 import com.location.dependencies.Versions.okhttp_log_version
 import com.location.dependencies.Versions.paging_version
 import com.location.dependencies.Versions.persistentCookieJar
+import com.location.dependencies.Versions.fragment_version
+import com.location.dependencies.Versions.constraintlayout_version
+import com.location.dependencies.Versions.lifecycle_version
+import com.location.dependencies.Versions.navigation_version
+import com.location.dependencies.Versions.retrofit_version
+import com.location.dependencies.Versions.moshi_version
 
 
 /**
@@ -31,7 +37,8 @@ object  Versions{
     const val core_ktx_version = "1.3.2"
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.1"
-    const val junit_vrsion = "4.13.1"
+    const val junit_version = "4.13.1"
+    const val android_junit_version = "1.1.2"
     const val espresso_core_version = "3.3.0"
     const val lifecycle_version = "2.2.0"
     const val startup_version = "1.0.0"
@@ -44,6 +51,10 @@ object  Versions{
     const val okhttp_log_version = "3.5.0"
     const val persistentCookieJar = "v1.0.1"
     const val leakCanary_version = "2.6"
+    const val constraintlayout_version = "2.0.4"
+    const val retrofit_version = "2.9.0"
+    const val moshi_version = "1.8.0"
+
 }
 
 object Deps {
@@ -54,4 +65,23 @@ object Deps {
     const val  OKHTTP_LOG = "com.squareup.okhttp3:logging-interceptor:$okhttp_log_version"
     const val  COOKIE = "com.github.franmontiel:PersistentCookieJar:${persistentCookieJar}"
     const val  LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:$leakCanary_version"
+    const val  fragment = "androidx.fragment:fragment-ktx:$fragment_version"
+    const val  constraintlayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    
+    const val  lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    const val  lifecycle_common = "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    const val  viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    const val  viewModelSaveState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    const val  lifecycleScop = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    
+    const val  navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    const val  navigationUI = "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    const val  retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+    const val  retrofitCoroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+    const val  retrofitRxJava2Adapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+    const val  retrofitMoshiConvert = "com.squareup.retrofit2:converter-moshi:2.9.0"
+    const val  moshi = "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    const val moshiCode = "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    const val webViewX5 = "com.tencent.tbs.tbssdk:sdk:43939"
 }

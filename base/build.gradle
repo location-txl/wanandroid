@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation "androidx.fragment:fragment-ktx:$Versions.fragment_version"
+    implementation Deps.fragment
     implementation Deps.DATA_STORE
     implementation Deps.PADING
 }
