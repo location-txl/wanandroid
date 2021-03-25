@@ -186,25 +186,39 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener
     )
 
     override fun onLogin() {
+        toast("请先登录")
 
+    }
 
+    fun logout(){
+        model.logout().observe(viewLifecycleOwner, Observer {
+            if (it.isSuccess()) {
+                lifecycleScope.launch {
+                    UserManager.clearLogin()
+                    toast("退出登陆成功")
+                }
+
+            }
+        })
+    }
+    private inline fun checkLogin(crossinline block:()->Unit){
+        lifecycleScope.launchWhenCreated {
+            if(UserManager.isLogin()){
+                block()
+            }else{
+                onLogin()
+            }
+        }
     }
 
     override fun onItemClickener(data: MeSettingsData, position: Int) {
         when (position) {
-            LOGOUT_POSITION -> {
-                model.logout().observe(viewLifecycleOwner, Observer {
-                    if (it.isSuccess()) {
-                        lifecycleScope.launch {
-                            UserManager.clearLogin()
-                            toast("退出登陆成功")
-
-                        }
-
-                    }
-                })
+            LOGOUT_POSITION -> logout()
+            COLLECT_POSITION -> {
+                checkLogin{
+                    startNewActivity<CollectActivity>()
+                }
             }
-            COLLECT_POSITION -> startNewActivity<CollectActivity>()
         }
     }
 
