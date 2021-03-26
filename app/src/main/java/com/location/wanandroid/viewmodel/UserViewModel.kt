@@ -4,7 +4,9 @@ import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.location.base.*
-import com.location.wanandroid.RetrofitUtils
+import com.location.network.RetrofitUtils
+import com.location.network.parseResult
+import com.location.network.response.Result
 import com.location.wanandroid.UserManager
 import com.location.wanandroid.repository.RemoteUserRep
 import com.location.wanandroid.repository.UserRepository
@@ -47,8 +49,7 @@ class UserViewModel : BaseViewModel() {
             emit(logRep.unLogout().apply {
                 if(isSuccess()){
                     UserManager.clearLogin()
-                    RetrofitUtils.cookieManager.clear()
-                    RetrofitUtils.cookieManager.clearSession()
+                    RetrofitUtils.clearCookie()
                 }
             })
 

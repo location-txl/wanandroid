@@ -1,17 +1,18 @@
+import com.location.dependencies.AppConfig
+import com.location.dependencies.Deps
 import com.location.dependencies.Versions
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion AppConfig.compile_version
+    buildToolsVersion AppConfig.build_tool_version
 
     defaultConfig {
-        minSdkVersion 27
-        targetSdkVersion 30
+        minSdkVersion
+        targetSdkVersion AppConfig.target_sdk_version
         versionCode 1
         versionName "1.0"
 
@@ -35,12 +36,13 @@ android {
 }
 
 dependencies {
-
+    implementation project(":base")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$Versions.kotlin"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    compileOnly Deps.lifecycle_livedata
+    implementation Deps.COOKIE
+    api Deps.retrofit
+    implementation Deps.OKHTTP_LOG
+    implementation Deps.retrofitRxJava2Adapter
+    implementation Deps.retrofitMoshiConvert
 }

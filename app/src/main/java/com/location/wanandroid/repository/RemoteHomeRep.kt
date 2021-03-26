@@ -1,9 +1,8 @@
 package com.location.wanandroid.repository
 
-import com.location.base.Result
-import com.location.base.excutResponse
-import com.location.base.safeCall
-import com.location.wanandroid.RetrofitUtils
+import com.location.network.executeResponse
+import com.location.network.response.Result
+import com.location.network.safeCall
 import com.location.wanandroid.data.HomeData
 import com.location.wanandroid.http.HomeService
 
@@ -14,12 +13,24 @@ import com.location.wanandroid.http.HomeService
  * description：
  */
 class RemoteHomeRep:HomeRepository {
-    private val service by lazy { RetrofitUtils.create(HomeService::class.java) }
+    companion object{
+        val instacne : HomeRepository by lazy { RemoteHomeRep() }
+    }
+    private val service by lazy { com.location.network.RetrofitUtils.create(HomeService::class.java) }
+
+    /**
+     * 加载首页数据
+     */
     override suspend fun loadHomeData(index: Int): Result<HomeData> {
-       return safeCall { excutResponse(service.homeList(index)) }
+       return safeCall { executeResponse(service.homeList(index)) }
     }
 
+    /**
+     *
+     * @param index Int
+     * @return Result<HomeData>
+     */
     override suspend fun loadQAData(index: Int): Result<HomeData> {
-        return safeCall { excutResponse(service.qAList(index)) }
+        return safeCall { executeResponse(service.qAList(index)) }
     }
 }

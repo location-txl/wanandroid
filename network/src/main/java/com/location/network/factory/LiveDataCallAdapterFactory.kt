@@ -1,7 +1,7 @@
-package com.location.wanandroid.http.factory
+package com.location.network.factory
 
 import androidx.lifecycle.LiveData
-import com.location.base.Result
+import com.location.network.response.Result
 import retrofit2.*
 import java.io.IOException
 import java.lang.reflect.ParameterizedType

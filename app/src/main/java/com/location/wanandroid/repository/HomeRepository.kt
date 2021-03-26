@@ -1,7 +1,7 @@
 package com.location.wanandroid.repository
 
 import com.location.base.BaseRepository
-import com.location.base.Result
+import com.location.network.response.Result
 import com.location.wanandroid.data.HomeData
 
 /**
@@ -11,8 +11,6 @@ import com.location.wanandroid.data.HomeData
  * description：
  */
 interface HomeRepository : BaseRepository {
-    suspend fun  loadHomeData(index:Int):Result<HomeData>
-    suspend fun  loadQAData(index:Int):Result<HomeData>
-
-
+    suspend fun  loadHomeData(index:Int): Result<HomeData>
+    suspend fun  loadQAData(index:Int): Result<HomeData>
 }

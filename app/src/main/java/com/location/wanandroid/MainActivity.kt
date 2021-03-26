@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityLoginBinding>() {
         finish()
     }
 
-    private fun registSuccess() {
+    private fun registerSuccess() {
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +33,9 @@ class MainActivity : BaseActivity<ActivityLoginBinding>() {
         userModel.loginStateLiveData().observe(this) {
             when (it) {
                 LoginState.LOGIN -> loginSuccess()
-                LoginState.REGIST -> registSuccess()
+                LoginState.REGIST -> registerSuccess()
             }
         }
-
-
-
-
-
     }
 
 

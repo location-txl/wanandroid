@@ -2,7 +2,7 @@ package com.location.wanandroid.padingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.location.base.Result
+import com.location.network.response.Result
 import com.location.base.logDebug
 import com.location.wanandroid.data.HomeData
 import com.location.wanandroid.data.HomeListData
@@ -22,7 +22,7 @@ class HomeSource(private val homeRep: HomeRepository,private val type:HomeSource
     }
 
 
-    private suspend fun loadData(loadIndex:Int):Result<HomeData>{
+    private suspend fun loadData(loadIndex:Int): Result<HomeData> {
         return when(type){
             HomeSourceType.HOME_DATA -> homeRep.loadHomeData(loadIndex)
             HomeSourceType.QA_DATA   -> homeRep.loadQAData(loadIndex)

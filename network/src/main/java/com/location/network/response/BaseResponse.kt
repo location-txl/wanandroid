@@ -1,4 +1,4 @@
-package com.location.base
+package com.location.network.response
 
 /**
  *
@@ -12,3 +12,4 @@ interface BaseResponse<out T> {
     val data:T?
     val msg:String
 }
+

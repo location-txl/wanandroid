@@ -1,6 +1,6 @@
 package com.location.wanandroid.data
 
-import com.location.base.BaseResponse
+import com.location.network.response.BaseResponse
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

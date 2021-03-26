@@ -1,4 +1,4 @@
-package com.location.base
+package com.location.network.response
 
 import java.lang.Exception
 
@@ -21,13 +21,5 @@ sealed class Result<out T> {
     data class Fail(val error: Exception, val code: Int = -1) : Result<Nothing>()
 }
 
-inline fun <T> Result<T>.parseResult(
-    success: (data: T) -> Unit,
-    noinline errorBlock: ((code: Int, msg: String) -> Unit)? = null
-) {
-    when (this) {
-        is Result.Success -> success(data)
-        is Result.Fail -> errorBlock?.invoke(code, error.message!!)
-    }
-}
+
 

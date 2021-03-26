@@ -14,6 +14,7 @@ import retrofit2.http.Path
 interface HomeService {
     @GET("article/list/{path}/json")
     suspend fun homeList(@Path("path") index:Int):WanResponse<HomeData>
+
     @GET("wenda/list/{path}/json")
     suspend fun qAList(@Path("path") index:Int):WanResponse<HomeData>
 

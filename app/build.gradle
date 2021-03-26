@@ -55,6 +55,7 @@ android {
 
 dependencies {
     implementation project(":base")
+    implementation project(":network")
     //fragment 扩展函数
     implementation Deps.fragment
 
@@ -75,10 +76,6 @@ dependencies {
     implementation Deps.navigationUI
 
 
-    //retrofit 网络库
-    implementation Deps.retrofit
-    implementation Deps.retrofitCoroutinesAdapter
-    implementation Deps.retrofitMoshiConvert
     //moshi json解析 替代gson 在kotlin平台比gson好
     implementation Deps.moshi
     kapt Deps.moshiCode

@@ -202,13 +202,13 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener
         })
     }
     private inline fun checkLogin(crossinline block:()->Unit){
-        lifecycleScope.launchWhenCreated {
-            if(UserManager.isLogin()){
+//        lifecycleScope.launchWhenCreated {
+//            if(UserManager.isLogin()){
                 block()
-            }else{
-                onLogin()
-            }
-        }
+//            }else{
+//                onLogin()
+//            }
+//        }
     }
 
     override fun onItemClickener(data: MeSettingsData, position: Int) {

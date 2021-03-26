@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
+import okhttp3.OkHttpClient
 import java.lang.RuntimeException
 import kotlin.concurrent.thread
 
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 class MyHandler(looper: Looper):Handler(looper){
     override fun handleMessage(msg: Message) {
         //处理消息
+//        OkHttpClient
     }
 
 }
