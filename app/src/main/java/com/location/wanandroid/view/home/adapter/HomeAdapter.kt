@@ -1,24 +1,23 @@
-package com.location.wanandroid.adapter
+package com.location.wanandroid.view.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.location.base.BaseViewHolder
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.data.HomeListDataDiff
 import com.location.wanandroid.databinding.ItemHomeBinding
-import com.location.wanandroid.widget.FavoritesView
+import com.location.base.widget.FavoritesView
 
 /**
  *
  * @author tianxiaolong
  * time：2021/2/27 11:00 PM
  * description：
+ * 首页通用的适配器
  */
 class HomeAdapter(private val listener: ItemClickListener) :
     PagingDataAdapter<HomeListData, HomeViewHolder>(

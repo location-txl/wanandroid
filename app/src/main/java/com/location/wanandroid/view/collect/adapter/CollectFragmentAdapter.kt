@@ -1,4 +1,4 @@
-package com.location.wanandroid.adapter
+package com.location.wanandroid.view.collect.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

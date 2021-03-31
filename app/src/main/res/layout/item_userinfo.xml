@@ -10,7 +10,7 @@
            type="com.location.wanandroid.UserManager" />
         <variable
             name="userInfo"
-            type="com.location.wanandroid.view.MeSettingFragment.SettingUser" />
+            type="com.location.wanandroid.view.home.MeSettingFragment.SettingUser" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

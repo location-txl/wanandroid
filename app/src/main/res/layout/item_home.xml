@@ -82,7 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="我是内容" />
 
-        <com.location.wanandroid.widget.FavoritesView
+        <com.location.base.widget.FavoritesView
             app:favorChecked="@{homeData.collect}"
             android:id="@+id/collect_btn"
             android:layout_width="30dp"

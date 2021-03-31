@@ -6,9 +6,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.location.base.BaseFragment
 import com.location.wanandroid.R
-import com.location.wanandroid.adapter.CollectArticleAdapter
+import com.location.wanandroid.view.collect.adapter.CollectArticleAdapter
 import com.location.wanandroid.databinding.FragmentHomeBinding
-import com.location.wanandroid.viewmodel.CollectViewModel
+import com.location.wanandroid.view.collect.viewmodel.CollectViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -20,8 +20,9 @@ import kotlinx.coroutines.launch
  */
 class CollectArticleFragment :BaseFragment<FragmentHomeBinding>() {
 
-    private val viewModel:CollectViewModel by activityViewModels()
-    private val adapter = CollectArticleAdapter()
+    private val viewModel: CollectViewModel by activityViewModels()
+    private val adapter =
+        CollectArticleAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerview.adapter = adapter

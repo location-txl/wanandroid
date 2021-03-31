@@ -31,4 +31,5 @@ dependencies {
     implementation Deps.fragment
     implementation Deps.DATA_STORE
     implementation Deps.PADING
+    compileOnly Deps.GLIDE
 }

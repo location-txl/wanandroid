@@ -70,6 +70,5 @@ data class CollectArticleItem(
         ): Boolean {
            return oldItem == newItem
         }
-
     }
 }

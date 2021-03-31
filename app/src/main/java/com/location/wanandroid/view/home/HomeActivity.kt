@@ -1,4 +1,4 @@
-package com.location.wanandroid.view
+package com.location.wanandroid.view.home
 
 import android.os.Bundle
 import android.widget.RadioButton
@@ -6,7 +6,7 @@ import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.location.base.BaseActivity
 import com.location.wanandroid.R
-import com.location.wanandroid.adapter.HomeFragmentAdapter
+import com.location.wanandroid.view.home.adapter.HomeFragmentAdapter
 import com.location.wanandroid.databinding.ActivityHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 
@@ -22,20 +22,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
 
     private fun createHomeFragment(type: HomeSourceType) =
-        HomeFragment().apply { arguments = HomeFragment.buildBundle(type) }
+        HomeFragment()
+            .apply { arguments = HomeFragment.buildBundle(type) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //设置缓存为4个
         binding.homeViewpager.offscreenPageLimit = 4
-        binding.homeViewpager.adapter = HomeFragmentAdapter(
-            supportFragmentManager, mutableListOf(
-                createHomeFragment(HomeSourceType.HOME_DATA),
-                createHomeFragment(HomeSourceType.QA_DATA),
-                createHomeFragment(HomeSourceType.QA_DATA),
-                MeSettingFragment()
+        binding.homeViewpager.adapter =
+            HomeFragmentAdapter(
+                supportFragmentManager, mutableListOf(
+                    createHomeFragment(HomeSourceType.HOME_DATA),
+                    createHomeFragment(HomeSourceType.QA_DATA),
+                    createHomeFragment(HomeSourceType.QA_DATA),
+                    MeSettingFragment()
+                )
             )
-        )
         binding.homeViewpager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }

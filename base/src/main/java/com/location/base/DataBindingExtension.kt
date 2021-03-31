@@ -1,12 +1,11 @@
-package com.location.wanandroid
+package com.location.base
 
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.location.base.logDebug
-import com.location.wanandroid.widget.FavoritesView
+import com.location.base.widget.FavoritesView
 
 /**
  *
@@ -19,12 +18,9 @@ import com.location.wanandroid.widget.FavoritesView
 @BindingAdapter("imageUrl")
 fun loadImage(view:ImageView,url:String?){
     url?.let {
-
-
-        Glide.with(view).load(url).error(R.drawable.logo).override(263).centerCrop()
+        Glide.with(view).load(url).override(263).centerCrop()
             .into(view)
     }
-
 }
 
 @BindingAdapter("htmlText")
@@ -33,6 +29,6 @@ fun htmlText(view:TextView,text:String){
 }
 
 @BindingAdapter("favorChecked")
-fun checked(view:FavoritesView,checked:Boolean){
+fun checked(view: FavoritesView, checked:Boolean){
     view.setState(checked)
 }

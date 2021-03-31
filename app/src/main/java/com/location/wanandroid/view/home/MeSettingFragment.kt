@@ -1,24 +1,20 @@
-package com.location.wanandroid.view
+package com.location.wanandroid.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.location.base.*
-import com.location.base.livedata.EventObserver
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.UserManager
 import com.location.wanandroid.UserState
 import com.location.wanandroid.data.MeSettingsData
-import com.location.wanandroid.data.UserData
 import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
 import com.location.wanandroid.databinding.ItemUserinfoBinding
@@ -32,7 +28,8 @@ import kotlinx.coroutines.launch
  * time：2021/3/2 10:18 PM
  * description：
  */
-class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener {
+class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
+    SettingViewListener {
 
     companion object {
         private const val LOGOUT_POSITION = 6
@@ -40,8 +37,15 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(), SettingViewListener
     }
 
     private val model: UserViewModel by activityViewModels()
-    private val adapter: Adapter by lazy { Adapter(titles, userInfo, this@MeSettingFragment) }
-    private val userInfo = SettingUser()
+    private val adapter: Adapter by lazy {
+        Adapter(
+            titles,
+            userInfo,
+            this@MeSettingFragment
+        )
+    }
+    private val userInfo =
+        SettingUser()
     override val layoutId: Int
         get() = R.layout.fragment_me
 

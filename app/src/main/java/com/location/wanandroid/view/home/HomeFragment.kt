@@ -1,4 +1,4 @@
-package com.location.wanandroid.view
+package com.location.wanandroid.view.home
 
 import android.os.Bundle
 import android.view.View
@@ -11,14 +11,15 @@ import com.location.base.fixInputMethodManagerLeak
 import com.location.base.logDebug
 import com.location.base.startNewActivity
 import com.location.wanandroid.*
-import com.location.wanandroid.adapter.HomeAdapter
-import com.location.wanandroid.adapter.ItemClickListener
+import com.location.wanandroid.view.home.adapter.HomeAdapter
+import com.location.wanandroid.view.home.adapter.ItemClickListener
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.databinding.FragmentHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.view.DetailsActivity.Companion.KEY_URL
-import com.location.wanandroid.viewmodel.HomeViewModel
-import com.location.wanandroid.widget.FavoritesView
+import com.location.wanandroid.view.home.viewmodel.HomeViewModel
+import com.location.base.widget.FavoritesView
+import com.location.wanandroid.view.DetailsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,8 @@ import kotlinx.coroutines.launch
  * time：2021/2/27 10:51 PM
  * description：
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), ItemClickListener {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(),
+    ItemClickListener {
     companion object {
         private const val EXERA_TYPE = "data_type"
         private const val TAG = "HomeFragment"
@@ -41,7 +43,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), ItemClickListener {
     override val layoutId: Int
         get() = R.layout.fragment_home
 
-    private val adapter by lazy { HomeAdapter(this@HomeFragment) }
+    private val adapter by lazy {
+        HomeAdapter(
+            this@HomeFragment
+        )
+    }
     private val homeModel: HomeViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

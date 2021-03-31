@@ -21,5 +21,7 @@ inline fun <T> Result<T>.parseResult(
     }
 }
 
-
-suspend inline fun <T> BaseResponse<T>.execute():Result<T> = executeResponse(this)
+/**
+ * BaseResponse 扩展函数 执行请求
+ */
+suspend inline fun <T> BaseResponse<T>.transform():Result<T> = executeResponse(this)
