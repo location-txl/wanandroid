@@ -6,8 +6,8 @@ import androidx.lifecycle.observe
 import com.location.base.BaseActivity
 import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
-import com.location.wanandroid.viewmodel.LoginState
-import com.location.wanandroid.viewmodel.UserViewModel
+import com.location.wanandroid.viewmodels.LoginState
+import com.location.wanandroid.viewmodels.UserViewModel
 
 class MainActivity : BaseActivity<ActivityLoginBinding>() {
     override val layoutId: Int

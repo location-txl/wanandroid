@@ -3,7 +3,7 @@ package com.location.wanandroid.view.collect
 import android.os.Bundle
 import com.location.base.BaseActivity
 import com.location.wanandroid.R
-import com.location.wanandroid.view.collect.adapter.CollectFragmentAdapter
+import com.location.wanandroid.adapter.collect.CollectFragmentAdapter
 import com.location.wanandroid.databinding.ActivityCollectBinding
 
 /**

@@ -6,9 +6,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.location.base.BaseFragment
 import com.location.wanandroid.R
-import com.location.wanandroid.view.collect.adapter.CollectArticleAdapter
+import com.location.wanandroid.adapter.coolect.CollectArticleAdapter
 import com.location.wanandroid.databinding.FragmentHomeBinding
-import com.location.wanandroid.view.collect.viewmodel.CollectViewModel
+import com.location.wanandroid.viewmodels.collect.CollectViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

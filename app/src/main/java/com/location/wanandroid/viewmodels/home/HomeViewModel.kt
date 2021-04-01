@@ -1,4 +1,4 @@
-package com.location.wanandroid.view.home.viewmodel
+package com.location.wanandroid.viewmodels.home
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager

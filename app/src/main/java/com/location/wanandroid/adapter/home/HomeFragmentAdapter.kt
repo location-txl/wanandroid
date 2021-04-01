@@ -1,4 +1,4 @@
-package com.location.wanandroid.view.home.adapter
+package com.location.wanandroid.adapter.home
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -6,7 +6,7 @@
     <data>
          <variable
              name="userModel"
-             type="com.location.wanandroid.viewmodel.UserViewModel" />
+             type="com.location.wanandroid.viewmodels.UserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

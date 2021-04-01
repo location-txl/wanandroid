@@ -1,4 +1,4 @@
-package com.location.wanandroid.viewmodel
+package com.location.wanandroid.viewmodels
 
 import android.text.TextUtils
 import androidx.databinding.ObservableField

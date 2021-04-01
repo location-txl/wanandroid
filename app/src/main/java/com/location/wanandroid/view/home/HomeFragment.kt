@@ -11,13 +11,13 @@ import com.location.base.fixInputMethodManagerLeak
 import com.location.base.logDebug
 import com.location.base.startNewActivity
 import com.location.wanandroid.*
-import com.location.wanandroid.view.home.adapter.HomeAdapter
-import com.location.wanandroid.view.home.adapter.ItemClickListener
+import com.location.wanandroid.adapter.home.HomeAdapter
+import com.location.wanandroid.adapter.home.ItemClickListener
 import com.location.wanandroid.data.HomeListData
 import com.location.wanandroid.databinding.FragmentHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.view.DetailsActivity.Companion.KEY_URL
-import com.location.wanandroid.view.home.viewmodel.HomeViewModel
+import com.location.wanandroid.viewmodels.home.HomeViewModel
 import com.location.base.widget.FavoritesView
 import com.location.wanandroid.view.DetailsActivity
 import kotlinx.coroutines.flow.collectLatest

@@ -6,7 +6,7 @@ import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.location.base.BaseActivity
 import com.location.wanandroid.R
-import com.location.wanandroid.view.home.adapter.HomeFragmentAdapter
+import com.location.wanandroid.adapter.home.HomeFragmentAdapter
 import com.location.wanandroid.databinding.ActivityHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 

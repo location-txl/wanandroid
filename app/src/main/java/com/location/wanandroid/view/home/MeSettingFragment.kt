@@ -19,7 +19,7 @@ import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
 import com.location.wanandroid.databinding.ItemUserinfoBinding
 import com.location.wanandroid.view.collect.CollectActivity
-import com.location.wanandroid.viewmodel.UserViewModel
+import com.location.wanandroid.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
 
 /**

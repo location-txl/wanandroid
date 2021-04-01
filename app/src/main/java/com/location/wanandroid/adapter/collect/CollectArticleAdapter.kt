@@ -1,4 +1,4 @@
-package com.location.wanandroid.view.collect.adapter
+package com.location.wanandroid.adapter.coolect
 
 import com.location.base.BasePagingDataAdapter
 import com.location.base.BaseViewHolder
