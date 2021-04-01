@@ -28,3 +28,4 @@
 
 -keep class com.tencent.tbs.** {
     *;
+}

@@ -32,9 +32,27 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+            properties.load( inputStream )
+            storeFile file("./src/main/keystore/wanandroid.jks")
+            def key_keyAlias = properties.getProperty( 'keyAlias' )
+            def key_keyPassword = properties.getProperty( 'keyPassword' )
+            def key_storePassword = properties.getProperty( 'storePassword' )
+            storePassword key_storePassword
+            keyAlias key_keyAlias
+            keyPassword key_keyPassword
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            //开启 代码压缩 优化 混淆
+            minifyEnabled true
+            //开启资源优化
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
@@ -42,7 +60,7 @@ android {
                 }
             }
 
-            // signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
