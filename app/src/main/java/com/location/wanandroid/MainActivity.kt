@@ -14,7 +14,6 @@ class MainActivity : BaseActivity<ActivityLoginBinding>() {
         get() = R.layout.activity_login
 
     private val userModel: UserViewModel by viewModels()
-
     private fun loginSuccess(){
         finish()
     }

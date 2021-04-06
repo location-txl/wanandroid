@@ -113,6 +113,10 @@ dependencies {
 
     implementation Deps.retrofitRxJava2Adapter
 
+    implementation Deps.dagger
+    kapt Deps.daggerCompiler
+
+
 
 
 }

@@ -8,6 +8,7 @@ import com.location.dependencies.Versions.paging_version
 import com.location.dependencies.Versions.persistentCookieJar
 import com.location.dependencies.Versions.fragment_version
 import com.location.dependencies.Versions.constraintlayout_version
+import com.location.dependencies.Versions.dagger_version
 import com.location.dependencies.Versions.lifecycle_version
 import com.location.dependencies.Versions.navigation_version
 import com.location.dependencies.Versions.retrofit_version
@@ -54,6 +55,7 @@ object  Versions{
     const val constraintlayout_version = "2.0.4"
     const val retrofit_version = "2.9.0"
     const val moshi_version = "1.8.0"
+    const val dagger_version = "2.24"
 
 }
 
@@ -84,4 +86,6 @@ object Deps {
     const val  moshi = "com.squareup.moshi:moshi-kotlin:$moshi_version"
     const val moshiCode = "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
     const val webViewX5 = "com.tencent.tbs.tbssdk:sdk:43939"
+    const val dagger = "com.google.dagger:dagger:$dagger_version"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:$dagger_version"
 }
