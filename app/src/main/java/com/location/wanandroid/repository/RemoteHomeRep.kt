@@ -6,6 +6,7 @@ import com.location.network.safeCall
 import com.location.wanandroid.data.HomeData
 import com.location.wanandroid.http.HomeService
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  *
@@ -13,7 +14,8 @@ import javax.inject.Inject
  * time：2021/2/27 11:25 PM
  * description：
  */
-class RemoteHomeRep   constructor():HomeRepository {
+
+class RemoteHomeRep  :HomeRepository {
     companion object{
         val instacne : HomeRepository by lazy { RemoteHomeRep() }
     }

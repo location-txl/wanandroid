@@ -1,17 +1,23 @@
 package com.location.base
 
 import android.os.Bundle
-import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.observe
+import com.location.base.delegate.DaggerActivityDelegate
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), HasAndroidInjector {
 
 
     abstract val layoutId: Int
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     protected val binding: T by lazy {
         DataBindingUtil.setContentView<T>(
@@ -19,7 +25,17 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         )
     }
 
+
+    /**
+     * 是否支持依赖注入
+     * @return Boolean
+     */
+    fun supportInject() = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(supportInject()){
+            DaggerActivityDelegate.create().inject(this)
+        }
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         init()
@@ -50,7 +66,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
 
-
+    override fun androidInjector(): AndroidInjector<Any?>? {
+        return androidInjector
+    }
 
 
 

@@ -3,8 +3,11 @@ package com.location.wanandroid
 import android.app.Application
 import android.content.Context
 import com.location.network.RetrofitUtils
+import com.location.wanandroid.comment.DaggerAppComment
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
 
 /**
@@ -17,7 +20,7 @@ import com.tencent.smtt.sdk.QbSdk
 lateinit var appContext: Context
     private set
 
-class App : Application() {
+class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -27,5 +30,9 @@ class App : Application() {
         map[TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER] = true
         map[TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE] = true
         QbSdk.initTbsSettings(map)
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+       return DaggerAppComment.factory().create(this)
     }
 }

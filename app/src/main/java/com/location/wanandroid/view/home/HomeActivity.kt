@@ -6,13 +6,17 @@ import android.widget.Toast
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.location.base.BaseActivity
+import com.location.base.assertNotNull
+import com.location.base.logDebug
 import com.location.base.toast
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.home.HomeFragmentAdapter
 import com.location.wanandroid.comment.DaggerHomeComment
 import com.location.wanandroid.databinding.ActivityHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
+import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.repository.RemoteHomeRep
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 /**
@@ -21,12 +25,15 @@ import javax.inject.Inject
  * time：2021/2/27 4:05 PM
  * description：
  */
-class HomeActivity : BaseActivity<ActivityHomeBinding>() {
+class HomeActivity : BaseActivity<ActivityHomeBinding>()  {
     override val layoutId: Int
         get() = R.layout.activity_home
 
     @Inject
-    lateinit var homeRep: RemoteHomeRep
+    lateinit var homeRep: HomeRepository
+
+    @Inject
+    lateinit var testData: TestData
     private fun createHomeFragment(type: HomeSourceType) =
         HomeFragment()
             .apply { arguments = HomeFragment.buildBundle(type) }
@@ -76,11 +83,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             binding.homeViewpager.setCurrentItem(index,true)
 
         }
-
 //        DaggerHomeComment.create().inject(this)
-        homeRep?.let {
-            toast("注入成功")
-        }
+        assertNotNull(homeRep)
+        assertNotNull(testData)
+        logDebug("TestScop","HomeRep code=${homeRep.hashCode()}")
     }
 }
 

@@ -6,10 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.location.base.BaseFragment
-import com.location.base.fixInputMethodManagerLeak
-import com.location.base.logDebug
-import com.location.base.startNewActivity
+import com.location.base.*
 import com.location.wanandroid.*
 import com.location.wanandroid.adapter.home.HomeAdapter
 import com.location.wanandroid.adapter.home.ItemClickListener
@@ -19,9 +16,12 @@ import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.view.DetailsActivity.Companion.KEY_URL
 import com.location.wanandroid.viewmodels.home.HomeViewModel
 import com.location.base.widget.FavoritesView
+import com.location.wanandroid.R
+import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.view.DetailsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  *
@@ -39,6 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
         }
     }
 
+    @Inject
+    lateinit var homeRep: HomeRepository
 
     override val layoutId: Int
         get() = R.layout.fragment_home
@@ -53,7 +55,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerview.adapter = adapter
         binding.lifecycleOwner = this
-
+        assertNotNull(homeRep)
+        logDebug("TestScop","HomeFragment HomeRep code=${homeRep.hashCode()}")
         lifecycleScope.launch {
             /**
              * 获取flow数据

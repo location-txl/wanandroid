@@ -114,7 +114,10 @@ dependencies {
     implementation Deps.retrofitRxJava2Adapter
 
     implementation Deps.dagger
+    implementation Deps.daggerAndroid
+    implementation Deps.daggerAndroidSupport
     kapt Deps.daggerCompiler
+    kapt Deps.daggerAndroidCompiler
 
 
 

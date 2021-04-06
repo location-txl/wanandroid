@@ -18,9 +18,11 @@ import com.location.wanandroid.data.MeSettingsData
 import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
 import com.location.wanandroid.databinding.ItemUserinfoBinding
+import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  *
@@ -35,6 +37,9 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
         private const val LOGOUT_POSITION = 6
         private const val COLLECT_POSITION = 2
     }
+
+    @Inject
+    lateinit var homeRep: HomeRepository
 
     private val model: UserViewModel by activityViewModels()
     private val adapter: Adapter by lazy {
@@ -63,6 +68,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logDebug("TestScop"," MeSettingsFragment HomeRep code=${homeRep.hashCode()}")
         //模拟数据
         binding.recyclerview.adapter = adapter
         refreshLoginState()

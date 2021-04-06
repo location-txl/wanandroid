@@ -55,7 +55,7 @@ object  Versions{
     const val constraintlayout_version = "2.0.4"
     const val retrofit_version = "2.9.0"
     const val moshi_version = "1.8.0"
-    const val dagger_version = "2.24"
+    const val dagger_version = "2.33"
 
 }
 
@@ -86,6 +86,10 @@ object Deps {
     const val  moshi = "com.squareup.moshi:moshi-kotlin:$moshi_version"
     const val moshiCode = "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
     const val webViewX5 = "com.tencent.tbs.tbssdk:sdk:43939"
+
     const val dagger = "com.google.dagger:dagger:$dagger_version"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:$dagger_version"
+    const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:$dagger_version"
+    const val daggerAndroid = "com.google.dagger:dagger-android:$dagger_version"
+    const val daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:$dagger_version"
 }

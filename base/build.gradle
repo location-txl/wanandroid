@@ -32,4 +32,10 @@ dependencies {
     implementation Deps.DATA_STORE
     implementation Deps.PADING
     compileOnly Deps.GLIDE
+
+    implementation Deps.dagger
+    implementation Deps.daggerAndroid
+    implementation Deps.daggerAndroidSupport
+    kapt Deps.daggerCompiler
+    kapt Deps.daggerAndroidCompiler
 }
