@@ -1,5 +1,6 @@
 package com.location.wanandroid.repository
 
+import com.location.network.RetrofitUtils
 import com.location.network.executeResponse
 import com.location.network.response.Result
 import com.location.network.safeCall
@@ -15,11 +16,9 @@ import javax.inject.Singleton
  * description：
  */
 
-class RemoteHomeRep  :HomeRepository {
-    companion object{
-        val instacne : HomeRepository by lazy { RemoteHomeRep() }
-    }
-    private val service by lazy { com.location.network.RetrofitUtils.create(HomeService::class.java) }
+class RemoteHomeRep(private val service:HomeService)  :HomeRepository {
+
+
 
     /**
      * 加载首页数据

@@ -8,19 +8,26 @@ import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
 import com.location.wanandroid.viewmodels.LoginState
 import com.location.wanandroid.viewmodels.UserViewModel
+import javax.inject.Inject
 
 class MainActivity : BaseActivity<ActivityLoginBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_login
 
-    private val userModel: UserViewModel by viewModels()
-    private fun loginSuccess(){
+    @Inject
+    lateinit var factory: UserViewModel.Factory
+
+    private val userModel: UserViewModel by viewModels {
+        factory }
+
+    private fun loginSuccess() {
         finish()
     }
 
     private fun registerSuccess() {
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

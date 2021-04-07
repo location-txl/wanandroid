@@ -11,6 +11,7 @@ import com.location.wanandroid.databinding.FragmentHomeBinding
 import com.location.wanandroid.viewmodels.collect.CollectViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  *
@@ -19,8 +20,9 @@ import kotlinx.coroutines.launch
  * description：
  */
 class CollectArticleFragment :BaseFragment<FragmentHomeBinding>() {
-
-    private val viewModel: CollectViewModel by activityViewModels()
+    @Inject
+    lateinit var factory:CollectViewModel.Factory
+    private val viewModel: CollectViewModel by activityViewModels({factory})
     private val adapter =
         CollectArticleAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

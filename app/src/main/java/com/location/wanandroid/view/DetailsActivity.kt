@@ -2,12 +2,14 @@ package com.location.wanandroid.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.location.base.BaseActivity
 import com.location.wanandroid.R
 import com.location.wanandroid.databinding.ActivityDetailsBinding
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
+import javax.inject.Inject
 
 /**
  *
@@ -23,6 +25,11 @@ class DetailsActivity: BaseActivity<ActivityDetailsBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_details
 
+
+
+    override fun supportInject(): Boolean {
+        return false
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.progressBar.visibility = View.VISIBLE

@@ -8,13 +8,14 @@ import com.location.network.RetrofitUtils
 import com.location.network.parseResult
 import com.location.network.response.Result
 import com.location.wanandroid.UserManager
+import com.location.wanandroid.http.UserService
 import com.location.wanandroid.repository.RemoteUserRep
 import com.location.wanandroid.repository.UserRepository
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
-class UserViewModel : BaseViewModel() {
-    private val logRep: UserRepository by lazy { RemoteUserRep() }
+class UserViewModel(private val logRep: UserRepository) : BaseViewModel() {
     private val TAG = "UserViewModel"
     val userName :ObservableField<String> = ObservableField()
     val pwd :ObservableField<String> = ObservableField()
@@ -55,6 +56,13 @@ class UserViewModel : BaseViewModel() {
 
         }
 
+
+    }
+
+    class Factory @Inject constructor(private val logRep: UserRepository):ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return UserViewModel(logRep) as T
+        }
 
     }
 

@@ -1,5 +1,7 @@
 package com.location.wanandroid.viewmodels.home
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -8,8 +10,10 @@ import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
 import com.location.wanandroid.padingsource.HomeSource
 import com.location.wanandroid.padingsource.HomeSourceType
+import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.repository.RemoteHomeRep
 import com.location.wanandroid.repository.RemoteUserRep
+import com.location.wanandroid.repository.UserRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -19,9 +23,7 @@ import kotlinx.coroutines.launch
  * time：2021/2/28 12:48 PM
  * description：
  */
-class HomeViewModel: BaseViewModel() {
-    private val homeRep  by lazy { RemoteHomeRep() }
-    private val userRep  by lazy { RemoteUserRep() }
+class HomeViewModel(private val homeRep:HomeRepository,private val userRep:UserRepository): BaseViewModel() {
 
     val homeFlow = Pager(
         PagingConfig(pageSize = 20)
@@ -47,6 +49,12 @@ class HomeViewModel: BaseViewModel() {
         return async.await()
     }
 
+    class Factory(private val homeRep:HomeRepository,private val userRep:UserRepository): ViewModelProvider.Factory {
 
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return HomeViewModel(homeRep, userRep) as T
+        }
+    }
 
 }

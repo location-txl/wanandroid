@@ -10,10 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.location.base.*
+import com.location.wanandroid.*
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
-import com.location.wanandroid.UserManager
-import com.location.wanandroid.UserState
 import com.location.wanandroid.data.MeSettingsData
 import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
@@ -39,9 +38,9 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
     }
 
     @Inject
-    lateinit var homeRep: HomeRepository
+    lateinit var factory: UserViewModel.Factory
 
-    private val model: UserViewModel by activityViewModels()
+    private val model: UserViewModel by activityViewModels{factory}
     private val adapter: Adapter by lazy {
         Adapter(
             titles,
@@ -68,7 +67,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logDebug("TestScop"," MeSettingsFragment HomeRep code=${homeRep.hashCode()}")
+//        logDebug("TestScop"," MeSettingsFragment HomeRep code=${homeRep.hashCode()}")
         //模拟数据
         binding.recyclerview.adapter = adapter
         refreshLoginState()
@@ -197,7 +196,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
 
     override fun onLogin() {
         toast("请先登录")
-
+        startNewActivity<MainActivity>()
     }
 
     fun logout(){

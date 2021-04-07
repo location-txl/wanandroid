@@ -30,7 +30,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), HasAndro
      * 是否支持依赖注入
      * @return Boolean
      */
-    fun supportInject() = true
+    open fun supportInject() = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(supportInject()){

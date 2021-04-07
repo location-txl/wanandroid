@@ -2,21 +2,16 @@ package com.location.wanandroid.view.home
 
 import android.os.Bundle
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.location.base.BaseActivity
 import com.location.base.assertNotNull
 import com.location.base.logDebug
-import com.location.base.toast
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.home.HomeFragmentAdapter
-import com.location.wanandroid.comment.DaggerHomeComment
 import com.location.wanandroid.databinding.ActivityHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.repository.HomeRepository
-import com.location.wanandroid.repository.RemoteHomeRep
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 /**
@@ -29,11 +24,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>()  {
     override val layoutId: Int
         get() = R.layout.activity_home
 
-    @Inject
-    lateinit var homeRep: HomeRepository
 
-    @Inject
-    lateinit var testData: TestData
+
+
     private fun createHomeFragment(type: HomeSourceType) =
         HomeFragment()
             .apply { arguments = HomeFragment.buildBundle(type) }
@@ -84,9 +77,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>()  {
 
         }
 //        DaggerHomeComment.create().inject(this)
-        assertNotNull(homeRep)
-        assertNotNull(testData)
-        logDebug("TestScop","HomeRep code=${homeRep.hashCode()}")
+//        assertNotNull(homeRep)
+//        assertNotNull(testData)
+//        logDebug("TestScop","HomeRep code=${homeRep.hashCode()}")
     }
 }
 

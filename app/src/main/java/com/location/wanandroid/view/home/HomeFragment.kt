@@ -18,6 +18,7 @@ import com.location.wanandroid.viewmodels.home.HomeViewModel
 import com.location.base.widget.FavoritesView
 import com.location.wanandroid.R
 import com.location.wanandroid.repository.HomeRepository
+import com.location.wanandroid.repository.UserRepository
 import com.location.wanandroid.view.DetailsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -39,8 +40,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
         }
     }
 
+
+
     @Inject
-    lateinit var homeRep: HomeRepository
+    lateinit var homeViewModelFactory: HomeViewModel.Factory
 
     override val layoutId: Int
         get() = R.layout.fragment_home
@@ -50,13 +53,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
             this@HomeFragment
         )
     }
-    private val homeModel: HomeViewModel by activityViewModels()
+
+
+    private val homeModel: HomeViewModel by activityViewModels {homeViewModelFactory}
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerview.adapter = adapter
         binding.lifecycleOwner = this
-        assertNotNull(homeRep)
-        logDebug("TestScop","HomeFragment HomeRep code=${homeRep.hashCode()}")
+//        assertNotNull(homeRep)
+//        logDebug("TestScop","HomeFragment HomeRep code=${homeRep.hashCode()}")
         lifecycleScope.launch {
             /**
              * 获取flow数据
