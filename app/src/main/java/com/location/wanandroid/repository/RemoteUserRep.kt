@@ -8,8 +8,9 @@ import com.location.network.safeCall
 import com.location.wanandroid.data.CollectArticleData
 import com.location.wanandroid.data.UserData
 import com.location.wanandroid.http.UserService
+import javax.inject.Inject
 
-class RemoteUserRep : UserRepository {
+class RemoteUserRep @Inject constructor(): UserRepository {
     companion object{
         val instance:UserRepository by lazy { RemoteUserRep() }
     }

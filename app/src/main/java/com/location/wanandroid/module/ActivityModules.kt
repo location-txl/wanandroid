@@ -6,6 +6,7 @@ import com.location.wanandroid.view.home.HomeFragment
 import com.location.wanandroid.view.home.MeSettingFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Singleton
 
 /**
  *
@@ -13,6 +14,7 @@ import dagger.android.ContributesAndroidInjector
  * time：2021/4/6 11:02 PM
  * description：
  */
+
 @Module
 abstract class ActivityModules {
 

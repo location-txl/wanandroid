@@ -16,7 +16,7 @@ import javax.inject.Singleton
  * description：
  */
 @Singleton
-@Component(modules = [AndroidInjectionModule::class,HomeModule::class,ActivityModules::class])
+@Component(modules = [AndroidInjectionModule::class,ActivityModules::class,HomeModule::class])
 interface AppComment :AndroidInjector<App>{
     @Component.Factory
     abstract class Builder : AndroidInjector.Factory<App>
