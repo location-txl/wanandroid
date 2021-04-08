@@ -2,6 +2,7 @@ package com.location.wanandroid.view.collect
 
 import android.os.Bundle
 import com.location.base.BaseActivity
+import com.location.base.BaseDaggerActivity
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.collect.CollectFragmentAdapter
 import com.location.wanandroid.databinding.ActivityCollectBinding
@@ -12,7 +13,7 @@ import com.location.wanandroid.databinding.ActivityCollectBinding
  * time：2021/3/6 4:37 PM
  * description：
  */
-class CollectActivity:BaseActivity<ActivityCollectBinding>(){
+class CollectActivity: BaseDaggerActivity<ActivityCollectBinding>(){
     override val layoutId: Int
         get() = R.layout.activity_collect
 

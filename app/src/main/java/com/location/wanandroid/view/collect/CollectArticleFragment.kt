@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.location.base.BaseDaggerVmFragment
 import com.location.base.BaseFragment
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.coolect.CollectArticleAdapter
@@ -19,10 +20,8 @@ import javax.inject.Inject
  * time：2021/3/6 4:58 PM
  * description：
  */
-class CollectArticleFragment :BaseFragment<FragmentHomeBinding>() {
-    @Inject
-    lateinit var factory:CollectViewModel.Factory
-    private val viewModel: CollectViewModel by activityViewModels({factory})
+class CollectArticleFragment :BaseDaggerVmFragment<FragmentHomeBinding,CollectViewModel.Factory>() {
+    private val viewModel: CollectViewModel by activityViewModels{factory}
     private val adapter =
         CollectArticleAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

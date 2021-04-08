@@ -3,22 +3,19 @@ package com.location.wanandroid
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
-import com.location.base.BaseActivity
+import com.location.base.BaseDaggerActivity
+import com.location.base.BaseDaggerVmActivity
 import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
 import com.location.wanandroid.viewmodels.LoginState
 import com.location.wanandroid.viewmodels.UserViewModel
-import javax.inject.Inject
 
-class MainActivity : BaseActivity<ActivityLoginBinding>() {
+class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Factory>() {
     override val layoutId: Int
         get() = R.layout.activity_login
 
-    @Inject
-    lateinit var factory: UserViewModel.Factory
 
-    private val userModel: UserViewModel by viewModels {
-        factory }
+    private val userModel: UserViewModel by viewModels { factory }
 
     private fun loginSuccess() {
         finish()

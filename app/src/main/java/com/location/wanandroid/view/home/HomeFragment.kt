@@ -30,7 +30,7 @@ import javax.inject.Inject
  * time：2021/2/27 10:51 PM
  * description：
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding>(),
+class HomeFragment : BaseDaggerVmFragment<FragmentHomeBinding,HomeViewModel.Factory>(),
     ItemClickListener {
     companion object {
         private const val EXERA_TYPE = "data_type"
@@ -42,8 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
 
 
 
-    @Inject
-    lateinit var homeViewModelFactory: HomeViewModel.Factory
+
 
     override val layoutId: Int
         get() = R.layout.fragment_home
@@ -55,7 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),
     }
 
 
-    private val homeModel: HomeViewModel by activityViewModels {homeViewModelFactory}
+    private val homeModel: HomeViewModel by activityViewModels {factory}
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerview.adapter = adapter

@@ -29,7 +29,7 @@ import javax.inject.Inject
  * time：2021/3/2 10:18 PM
  * description：
  */
-class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
+class MeSettingFragment : BaseDaggerVmFragment<FragmentMeBinding,UserViewModel.Factory>(),
     SettingViewListener {
 
     companion object {
@@ -37,8 +37,7 @@ class MeSettingFragment : BaseFragment<FragmentMeBinding>(),
         private const val COLLECT_POSITION = 2
     }
 
-    @Inject
-    lateinit var factory: UserViewModel.Factory
+
 
     private val model: UserViewModel by activityViewModels{factory}
     private val adapter: Adapter by lazy {

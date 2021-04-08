@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.location.base.delegate.DaggerFragmentDelegate
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -20,21 +21,15 @@ import javax.inject.Inject
  * time：2021/2/27 10:53 PM
  * description：
  */
-abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
-    abstract val layoutId:Int
-
-    lateinit var binding:T
-    private set
+abstract class BaseDaggerVmFragment<T: ViewDataBinding,  VF: ViewModelProvider.Factory> : BaseDaggerFragment<T>() {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,layoutId,container,false)
-        return binding.root
+
+    @Inject
+    lateinit var factory:VF
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        assertNotNull(factory)
     }
-
-
 }

@@ -5,6 +5,7 @@ import android.widget.RadioButton
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.location.base.BaseActivity
+import com.location.base.BaseDaggerActivity
 import com.location.base.assertNotNull
 import com.location.base.logDebug
 import com.location.wanandroid.R
@@ -20,7 +21,7 @@ import javax.inject.Inject
  * time：2021/2/27 4:05 PM
  * description：
  */
-class HomeActivity : BaseActivity<ActivityHomeBinding>()  {
+class HomeActivity : BaseDaggerActivity<ActivityHomeBinding>()  {
     override val layoutId: Int
         get() = R.layout.activity_home
 

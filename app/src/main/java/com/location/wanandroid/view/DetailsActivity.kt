@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.location.base.BaseActivity
+import com.location.base.BaseDaggerActivity
 import com.location.wanandroid.R
 import com.location.wanandroid.databinding.ActivityDetailsBinding
 import com.tencent.smtt.sdk.WebChromeClient
@@ -18,7 +19,7 @@ import javax.inject.Inject
  * description：
  */
 
-class DetailsActivity: BaseActivity<ActivityDetailsBinding>() {
+class DetailsActivity: BaseDaggerActivity<ActivityDetailsBinding>() {
     companion object{
         const val KEY_URL = "key_url"
     }
@@ -27,9 +28,6 @@ class DetailsActivity: BaseActivity<ActivityDetailsBinding>() {
 
 
 
-    override fun supportInject(): Boolean {
-        return false
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.progressBar.visibility = View.VISIBLE

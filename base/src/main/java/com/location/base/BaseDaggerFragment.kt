@@ -20,21 +20,31 @@ import javax.inject.Inject
  * time：2021/2/27 10:53 PM
  * description：
  */
-abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
-    abstract val layoutId:Int
-
-    lateinit var binding:T
-    private set
+abstract class BaseDaggerFragment<T: ViewDataBinding> : BaseFragment<T>(), HasAndroidInjector {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater,layoutId,container,false)
-        return binding.root
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+
+    /**
+     * 是否支持依赖注入
+     * @return Boolean
+     */
+    fun supportInject() = true
+
+
+    override fun onAttach(context: Context) {
+        if(supportInject()){
+            DaggerFragmentDelegate.create().inject(this)
+        }
+        super.onAttach(context)
     }
 
+
+    override fun androidInjector(): AndroidInjector<Any?>? {
+        return androidInjector
+    }
 
 }
