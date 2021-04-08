@@ -9,13 +9,14 @@ import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
 import com.location.wanandroid.viewmodels.LoginState
 import com.location.wanandroid.viewmodels.UserViewModel
+import kotlin.reflect.KClass
 
-class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Factory>() {
+class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Factory,UserViewModel>() {
     override val layoutId: Int
         get() = R.layout.activity_login
 
 
-    private val userModel: UserViewModel by viewModels { factory }
+
 
     private fun loginSuccess() {
         finish()
@@ -28,18 +29,21 @@ class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Fac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.userModel = userModel
+        binding.userModel = viewModels
 
-        userModel.msgLiveData().observe(this) {
+        viewModels.msgLiveData().observe(this) {
             toast(it)
         }
-        userModel.loginStateLiveData().observe(this) {
+        viewModels.loginStateLiveData().observe(this) {
             when (it) {
                 LoginState.LOGIN -> loginSuccess()
                 LoginState.REGIST -> registerSuccess()
             }
         }
     }
+
+    override val viewModelClass: KClass<UserViewModel>
+        get() = UserViewModel::class
 
 
 }
