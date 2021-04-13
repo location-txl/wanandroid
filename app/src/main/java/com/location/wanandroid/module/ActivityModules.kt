@@ -1,7 +1,6 @@
 package com.location.wanandroid.module
 
 import com.location.wanandroid.MainActivity
-import com.location.wanandroid.scops.HomeScops
 import com.location.wanandroid.view.DetailsActivity
 import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.view.collect.CollectArticleFragment
@@ -29,6 +28,9 @@ abstract class ActivityModules {
 
     @ContributesAndroidInjector
     abstract fun injectMainActivity():MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun injectDetailsActivity():DetailsActivity
 
     @ContributesAndroidInjector
     abstract fun injectHomeFragment():HomeFragment
