@@ -4,6 +4,7 @@ import com.location.wanandroid.MainActivity
 import com.location.wanandroid.view.DetailsActivity
 import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.view.collect.CollectArticleFragment
+import com.location.wanandroid.view.collect.CollectWebsiteFragment
 import com.location.wanandroid.view.home.HomeActivity
 import com.location.wanandroid.view.home.HomeFragment
 import com.location.wanandroid.view.home.MeSettingFragment
@@ -37,6 +38,9 @@ abstract class ActivityModules {
 
     @ContributesAndroidInjector
     abstract fun injectCollectArticleFragment():CollectArticleFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectCollectWebSliteFragment():CollectWebsiteFragment
 
 
 

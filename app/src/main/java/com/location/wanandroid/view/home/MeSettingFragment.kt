@@ -66,7 +66,6 @@ class MeSettingFragment : BaseDaggerVmFragment<FragmentMeBinding,UserViewModel.F
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        logDebug("TestScop"," MeSettingsFragment HomeRep code=${homeRep.hashCode()}")
         //模拟数据
         binding.recyclerview.adapter = adapter
         refreshLoginState()
@@ -194,11 +193,10 @@ class MeSettingFragment : BaseDaggerVmFragment<FragmentMeBinding,UserViewModel.F
     )
 
     override fun onLogin() {
-        toast("请先登录")
         startNewActivity<MainActivity>()
     }
 
-    fun logout(){
+    private fun logout(){
         model.logout().observe(viewLifecycleOwner, Observer {
             if (it.isSuccess()) {
                 lifecycleScope.launch {
@@ -210,13 +208,13 @@ class MeSettingFragment : BaseDaggerVmFragment<FragmentMeBinding,UserViewModel.F
         })
     }
     private inline fun checkLogin(crossinline block:()->Unit){
-//        lifecycleScope.launchWhenCreated {
-//            if(UserManager.isLogin()){
+        lifecycleScope.launchWhenCreated {
+            if(UserManager.isLogin()){
                 block()
-//            }else{
-//                onLogin()
-//            }
-//        }
+            }else{
+                onLogin()
+            }
+        }
     }
 
     override fun onItemClickener(data: MeSettingsData, position: Int) {

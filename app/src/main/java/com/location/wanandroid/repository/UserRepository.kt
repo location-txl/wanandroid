@@ -3,8 +3,9 @@ package com.location.wanandroid.repository
 import com.location.base.BaseRepository
 import com.location.network.response.Result
 import com.location.base.EmptyData
-import com.location.wanandroid.data.CollectArticleData
+import com.location.wanandroid.data.collect.CollectArticleData
 import com.location.wanandroid.data.UserData
+import com.location.wanandroid.data.collect.CollectWebSlite
 import retrofit2.http.Path
 
 interface UserRepository:BaseRepository {
@@ -12,5 +13,7 @@ interface UserRepository:BaseRepository {
     suspend fun collectArticle( id:Long): Result<EmptyData>
     suspend fun unCollectArticle( id:Long): Result<EmptyData>
     suspend fun unLogout(): Result<EmptyData>
-    suspend fun getCollectList(@Path("path") index:Int): Result<CollectArticleData>
+    suspend fun getCollectList( index:Int): Result<CollectArticleData>
+    suspend fun getCollectWebSliteList():Result<List<CollectWebSlite>>
+
 }

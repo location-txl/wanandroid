@@ -1,13 +1,13 @@
 package com.location.wanandroid.viewmodels.collect
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
 import com.location.network.RetrofitUtils
+import com.location.network.parseResult
+import com.location.wanandroid.data.collect.CollectWebSlite
 import com.location.wanandroid.http.UserService
 import com.location.wanandroid.padingsource.CollectArticleSource
 import com.location.wanandroid.repository.RemoteUserRep
@@ -27,6 +27,14 @@ class CollectViewModel(private val userRepository:UserRepository): BaseViewModel
         Pager(config = PagingConfig(pageSize = 20)) {
             CollectArticleSource(userRepository)
         }.flow.cachedIn(viewModelScope)
+    }
+
+    fun getWebSliteList():LiveData<List<CollectWebSlite>>{
+        return liveData {
+            userRepository.getCollectWebSliteList().parseResult({
+                emit(it)
+            })
+        }
     }
 
     class Factory @Inject constructor(private val userRepository:UserRepository):ViewModelProvider.Factory{

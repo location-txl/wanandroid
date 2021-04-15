@@ -3,7 +3,7 @@ package com.location.wanandroid.padingsource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.location.network.response.Result
-import com.location.wanandroid.data.CollectArticleItem
+import com.location.wanandroid.data.collect.CollectArticleItem
 import com.location.wanandroid.repository.UserRepository
 
 /**

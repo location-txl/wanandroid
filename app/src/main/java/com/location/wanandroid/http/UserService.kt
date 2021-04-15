@@ -2,8 +2,9 @@ package com.location.wanandroid.http
 
 import com.location.base.EmptyData
 import com.location.wanandroid.data.UserData
-import com.location.wanandroid.data.WanCollectArticle
+import com.location.wanandroid.data.collect.WanCollectArticle
 import com.location.wanandroid.data.WanResponse
+import com.location.wanandroid.data.collect.CollectWebSliteData
 import retrofit2.http.*
 
 interface UserService {
@@ -50,7 +51,24 @@ interface UserService {
      *获取收藏文章列表
      */
     @GET("lg/collect/list/{path}/json")
-    suspend fun  getCollectList(@Path("path") index:Int):WanCollectArticle
+    suspend fun getCollectList(@Path("path") index: Int): WanCollectArticle
+
+    /**
+     * 获取收藏的网站列表
+     *  {
+    "desc": "",
+    "icon": "",
+    "id": 650,
+    "link": "http://www.baidu.com",
+    "name": "玩Android",
+    "order": 0,
+    "userId": 428,
+    "visible": 1
+    }
+     * @return CollectWebSliteData
+     */
+    @GET("lg/collect/usertools/json")
+    suspend fun getWebSliteList(): CollectWebSliteData
 
 
 //    @FormUrlEncoded
@@ -59,7 +77,6 @@ interface UserService {
 //        @Field("username") userName: String,
 //        @Field("password") pwd: String
 //    ): HttpLiveData<WanResponse<UserData>>
-
 
 
 //    @FormUrlEncoded

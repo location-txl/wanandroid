@@ -1,5 +1,7 @@
-package com.location.wanandroid.data
+package com.location.wanandroid.data.collect
 import androidx.recyclerview.widget.DiffUtil
+import com.location.wanandroid.data.PageData
+import com.location.wanandroid.data.WanResponse
 import com.squareup.moshi.JsonClass
 
 import com.squareup.moshi.Json

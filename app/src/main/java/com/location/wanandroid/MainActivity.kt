@@ -1,9 +1,7 @@
 package com.location.wanandroid
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.lifecycle.observe
-import com.location.base.BaseDaggerActivity
 import com.location.base.BaseDaggerVmActivity
 import com.location.base.toast
 import com.location.wanandroid.databinding.ActivityLoginBinding
@@ -17,7 +15,6 @@ class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Fac
 
 
 
-
     private fun loginSuccess() {
         finish()
     }
@@ -28,9 +25,7 @@ class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Fac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding.userModel = viewModels
-
         viewModels.msgLiveData().observe(this) {
             toast(it)
         }

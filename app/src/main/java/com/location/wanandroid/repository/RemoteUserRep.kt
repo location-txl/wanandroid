@@ -5,10 +5,10 @@ import com.location.network.call
 import com.location.network.executeResponse
 import com.location.network.response.Result
 import com.location.network.safeCall
-import com.location.wanandroid.data.CollectArticleData
+import com.location.wanandroid.data.collect.CollectArticleData
 import com.location.wanandroid.data.UserData
+import com.location.wanandroid.data.collect.CollectWebSlite
 import com.location.wanandroid.http.UserService
-import javax.inject.Inject
 
 class RemoteUserRep(private val service:UserService): UserRepository {
 
@@ -29,6 +29,10 @@ class RemoteUserRep(private val service:UserService): UserRepository {
 
     override suspend fun getCollectList(index: Int): Result<CollectArticleData> {
         return safeCall { executeResponse(service.getCollectList(index)) }
+    }
+
+    override suspend fun getCollectWebSliteList(): Result<List<CollectWebSlite>> {
+        return safeCall { executeResponse(service.getWebSliteList()) }
     }
 
 

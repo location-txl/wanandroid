@@ -23,7 +23,7 @@ class CollectActivity: BaseDaggerActivity<ActivityCollectBinding>(){
              CollectFragmentAdapter(
                  supportFragmentManager, mutableListOf(
                      CollectArticleFragment(),
-                     CollectArticleFragment()
+                     CollectWebsiteFragment()
 
                  ), mutableListOf("文章", "网址")
              )

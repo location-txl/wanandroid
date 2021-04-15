@@ -4,7 +4,7 @@ import com.location.base.BasePagingDataAdapter
 import com.location.base.BaseViewHolder
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
-import com.location.wanandroid.data.CollectArticleItem
+import com.location.wanandroid.data.collect.CollectArticleItem
 import com.location.wanandroid.databinding.ItemCollectBinding
 
 /**
@@ -14,13 +14,13 @@ import com.location.wanandroid.databinding.ItemCollectBinding
  * description：
  */
 class CollectArticleAdapter :
-    BasePagingDataAdapter<CollectArticleItem, ItemCollectBinding, ViewHolder>(CollectArticleItem.DiffCallback()) {
+    BasePagingDataAdapter<CollectArticleItem, ViewHolder>(
+        CollectArticleItem.DiffCallback()) {
     override val layoutId: Int
         get() = R.layout.item_collect
+    override val vHClazz: Class<ViewHolder>
+        get() = ViewHolder::class.java
 
-    override fun createViewHolder(binding: ItemCollectBinding): ViewHolder {
-        return ViewHolder(binding)
-    }
 }
 
 class ViewHolder(binding: ItemCollectBinding) :
