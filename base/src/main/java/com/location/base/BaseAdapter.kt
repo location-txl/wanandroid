@@ -2,41 +2,32 @@ package com.location.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 
 /**
  *
  * @author tianxiaolong
- * time：2021/2/28 6:00 PM
+ * time：4/15/21 10:06 PM
  * description：
  */
-abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
-    diffCallback: DiffUtil.ItemCallback<T>
-) :
-    PagingDataAdapter<T, VH>(diffCallback) {
-
-    abstract val layoutId: Int
-
-    //TODO 优化vHClazz
-    abstract val vHClazz: Class<VH>
+abstract class BaseAdapter<T, VH : BaseViewHolder<*, T>>(diffCallback: DiffUtil.ItemCallback<T>) :
+    ListAdapter<T, VH>(diffCallback) {
 
 
     open fun viewHolderFactory(viewType: Int): BaseViewHolder.Factory {
         return BaseViewHolder.DefaultFactory()
     }
 
+    //TODO 优化vHClazz
+    abstract val vHClazz: Class<VH>
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.onBind(getItem(position)!!)
-    }
-
+    abstract val layoutId: Int
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+
         val holder = viewHolderFactory(viewType).create(vHClazz, DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             layoutId,
@@ -47,5 +38,7 @@ abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
         return holder!!
     }
 
-
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.onBind(getItem(position))
+    }
 }
