@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.location.base.assertNotNull
 
 /**
  *
@@ -17,7 +16,7 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<*, T>>(diffCallback: DiffUtil.
     ListAdapter<T, VH>(diffCallback) {
 
 
-    open fun viewHolderFactory(viewType: Int): BaseViewHolder.Factory {
+    open fun viewHolderFactory(): BaseViewHolder.Factory {
         return BaseViewHolder.DefaultFactory()
     }
 
@@ -29,14 +28,14 @@ abstract class BaseAdapter<T, VH : BaseViewHolder<*, T>>(diffCallback: DiffUtil.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
 
-        val holder = viewHolderFactory(viewType).create(vHClazz, DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layoutId,
-            parent,
-            false
-        ))
-        assertNotNull(holder)
-        return holder!!
+        return viewHolderFactory().create(
+            vHClazz, DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                layoutId,
+                parent,
+                false
+            ), viewType
+        )
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {

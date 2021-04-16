@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.location.base.assertNotNull
 
 /**
  *
@@ -23,9 +22,7 @@ abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
     //TODO 优化vHClazz
     abstract val vHClazz: Class<VH>
 
-    open fun viewHolderFactory(viewType: Int): BaseViewHolder.Factory {
-        return BaseViewHolder.DefaultFactory()
-    }
+    open fun viewHolderFactory(): BaseViewHolder.Factory = BaseViewHolder.DefaultFactory()
 
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -33,14 +30,15 @@ abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val holder = viewHolderFactory(viewType).create(vHClazz, DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layoutId,
-            parent,
-            false
-        ))
-        assertNotNull(holder)
-        return holder!!
+        return viewHolderFactory().create(
+            vHClazz, DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                layoutId,
+                parent,
+                false
+            ), viewType
+        )
+
     }
 
 

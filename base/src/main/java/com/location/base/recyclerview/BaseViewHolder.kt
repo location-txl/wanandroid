@@ -14,18 +14,26 @@ abstract class BaseViewHolder<V:ViewDataBinding,T>(val binding:V) :RecyclerView.
 
 
     interface Factory{
-        fun <VH: BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding):VH?
+        /**
+         * 创建ViewHolder
+         * @param clazz Class<VH> 当前ViewHolder的类型
+         * @param binding ViewDataBinding 数据绑定Binding
+         * @param viewType item类型
+         */
+        fun <VH: BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding, viewType:Int):VH
     }
 
     class DefaultFactory : Factory {
-
-        override fun <VH : BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding): VH? {
+        /**
+         *@throws NoSuchMethodException
+         */
+        override fun <VH : BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding, viewType: Int): VH {
             try {
                 return clazz.getConstructor(binding::class.java.superclass).newInstance(binding)
             } catch (e: NoSuchMethodException) {
-                e.printStackTrace()
+                throw e
             }
-            return null
+
         }
 
 
