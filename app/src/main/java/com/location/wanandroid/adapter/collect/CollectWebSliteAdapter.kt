@@ -1,7 +1,7 @@
 package com.location.wanandroid.adapter.collect
 
-import com.location.base.BaseAdapter
-import com.location.base.BaseViewHolder
+import com.location.base.recyclerview.BaseAdapter
+import com.location.base.recyclerview.BaseViewHolder
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.data.collect.CollectWebSlite

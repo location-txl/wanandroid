@@ -5,17 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
 import com.location.wanandroid.padingsource.HomeSource
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.repository.HomeRepository
-import com.location.wanandroid.repository.RemoteHomeRep
-import com.location.wanandroid.repository.RemoteUserRep
 import com.location.wanandroid.repository.UserRepository
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 /**
  *

@@ -4,12 +4,11 @@ import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.location.base.*
+import com.location.base.BaseViewModel
 import com.location.network.RetrofitUtils
 import com.location.network.parseResult
 import com.location.network.response.Result
 import com.location.wanandroid.UserManager
-import com.location.wanandroid.http.UserService
-import com.location.wanandroid.repository.RemoteUserRep
 import com.location.wanandroid.repository.UserRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject

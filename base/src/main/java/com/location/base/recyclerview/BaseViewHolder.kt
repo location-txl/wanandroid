@@ -1,4 +1,4 @@
-package com.location.base
+package com.location.base.recyclerview
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +14,10 @@ abstract class BaseViewHolder<V:ViewDataBinding,T>(val binding:V) :RecyclerView.
 
 
     interface Factory{
-        fun <VH:BaseViewHolder<*,*>> create(clazz: Class<VH>,binding: ViewDataBinding):VH?
+        fun <VH: BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding):VH?
     }
 
     class DefaultFactory : Factory {
-
 
         override fun <VH : BaseViewHolder<*, *>> create(clazz: Class<VH>, binding: ViewDataBinding): VH? {
             try {

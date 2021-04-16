@@ -1,7 +1,7 @@
 package com.location.wanandroid.adapter.coolect
 
-import com.location.base.BasePagingDataAdapter
-import com.location.base.BaseViewHolder
+import com.location.base.recyclerview.BasePagingDataAdapter
+import com.location.base.recyclerview.BaseViewHolder
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.data.collect.CollectArticleItem

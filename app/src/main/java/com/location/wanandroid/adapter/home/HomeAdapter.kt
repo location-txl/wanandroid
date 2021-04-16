@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
-import com.location.base.BaseViewHolder
+import com.location.base.recyclerview.BaseViewHolder
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
 import com.location.wanandroid.data.HomeListData

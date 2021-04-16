@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.location.base.*
+import com.location.base.recyclerview.BaseViewHolder
 import com.location.wanandroid.*
 import com.location.wanandroid.BR
 import com.location.wanandroid.R
@@ -17,11 +18,9 @@ import com.location.wanandroid.data.MeSettingsData
 import com.location.wanandroid.databinding.FragmentMeBinding
 import com.location.wanandroid.databinding.ItemMeSettingsBinding
 import com.location.wanandroid.databinding.ItemUserinfoBinding
-import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  *
