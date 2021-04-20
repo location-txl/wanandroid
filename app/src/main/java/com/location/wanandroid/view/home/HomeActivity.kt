@@ -41,7 +41,7 @@ class HomeActivity : BaseDaggerActivity<ActivityHomeBinding>()  {
                 supportFragmentManager, mutableListOf(
                     createHomeFragment(HomeSourceType.HOME_DATA),
                     createHomeFragment(HomeSourceType.QA_DATA),
-                    createHomeFragment(HomeSourceType.QA_DATA),
+                    PublicFragment(),
                     MeSettingFragment()
                 )
             )

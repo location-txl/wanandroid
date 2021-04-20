@@ -15,7 +15,10 @@ import com.location.wanandroid.repository.HomeRepository
  * description：
  */
 class HomeSource(private val homeRep: HomeRepository,private val type:HomeSourceType): PagingSource<Int, HomeListData>() {
-    private val TAG = "HomeSource"
+    companion object{
+        private const val TAG = "HomeSource"
+    }
+
     override fun getRefreshKey(state: PagingState<Int, HomeListData>): Int? {
         logDebug(TAG,"getRefreshKey")
         return 0
@@ -26,6 +29,7 @@ class HomeSource(private val homeRep: HomeRepository,private val type:HomeSource
         return when(type){
             HomeSourceType.HOME_DATA -> homeRep.loadHomeData(loadIndex)
             HomeSourceType.QA_DATA   -> homeRep.loadQAData(loadIndex)
+            else -> throw UnsupportedOperationException("not support type is ${type.name}")
         }
     }
     /**
@@ -49,4 +53,5 @@ class HomeSource(private val homeRep: HomeRepository,private val type:HomeSource
 enum class HomeSourceType{
     HOME_DATA,
     QA_DATA,
+    PUBLIC_ARTICLE,
 }

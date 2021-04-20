@@ -1,12 +1,12 @@
 package com.location.wanandroid.viewmodels.home
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
+import com.location.network.parseResult
+import com.location.wanandroid.data.PublicArticle
 import com.location.wanandroid.padingsource.HomeSource
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.repository.HomeRepository
@@ -32,6 +32,16 @@ class HomeViewModel(private val homeRep:HomeRepository,private val userRep:UserR
     ){
         HomeSource(homeRep,HomeSourceType.QA_DATA)
     }.flow.cachedIn(viewModelScope)
+
+    fun getpublic(): LiveData<List<PublicArticle>> {
+        return liveData {
+
+            homeRep.public().parseResult({
+                emit(it)
+            })
+        }
+
+    }
 
 
     suspend fun collect(id:Long,collect:Boolean): Boolean {

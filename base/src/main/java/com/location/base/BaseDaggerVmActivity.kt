@@ -25,4 +25,6 @@ abstract class BaseDaggerVmActivity<T : ViewDataBinding,  VF : ViewModelProvider
 
 
 
+
+
 }

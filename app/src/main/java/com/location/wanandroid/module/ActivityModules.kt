@@ -5,9 +5,7 @@ import com.location.wanandroid.view.DetailsActivity
 import com.location.wanandroid.view.collect.CollectActivity
 import com.location.wanandroid.view.collect.CollectArticleFragment
 import com.location.wanandroid.view.collect.CollectWebsiteFragment
-import com.location.wanandroid.view.home.HomeActivity
-import com.location.wanandroid.view.home.HomeFragment
-import com.location.wanandroid.view.home.MeSettingFragment
+import com.location.wanandroid.view.home.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -35,6 +33,12 @@ abstract class ActivityModules {
 
     @ContributesAndroidInjector
     abstract fun injectHomeFragment():HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectPublicFragment():PublicFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectPublicChildFragment():PublicChildFragment
 
     @ContributesAndroidInjector
     abstract fun injectCollectArticleFragment():CollectArticleFragment
