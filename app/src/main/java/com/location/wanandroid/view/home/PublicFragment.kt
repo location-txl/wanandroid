@@ -28,11 +28,10 @@ import kotlinx.coroutines.launch
  * @author tianxiaolong
  * time：2021/2/27 10:51 PM
  * description：
+ * viewpager2
  * https://developer.android.google.cn/training/animation/vp2-migration?hl=zh_cn#layout-files
  */
-class PublicFragment : BaseDaggerVmFragment<FragmentPublicBinding,HomeViewModel.Factory>(),
-    ItemClickListener {
-
+class PublicFragment : BaseDaggerVmFragment<FragmentPublicBinding,HomeViewModel.Factory>(){
 
 
 
@@ -41,70 +40,27 @@ class PublicFragment : BaseDaggerVmFragment<FragmentPublicBinding,HomeViewModel.
     override val layoutId: Int
         get() = R.layout.fragment_public
 
-    private val adapter by lazy {
-        HomeAdapter(
-            this@PublicFragment
-        )
-    }
 
 
     private val homeModel: HomeViewModel by activityViewModels {factory}
 
-    private fun createFragments(list:List<PublicArticle>):List<Fragment>{
-        val fragments:MutableList<Fragment> = mutableListOf()
-        list.forEach { _ ->
-            fragments.add(PublicChildFragment())
-        }
-        return fragments
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.recyclerview.adapter = adapter
-//        binding.recyclerview.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
-//        binding.tableLayout.setupWithViewPager(binding.viewPager)
         binding.lifecycleOwner = this
-//        binding.viewPager
 
+        /**
+         * tableLayout和Viewpager2的联动方式
+         */
         homeModel.getpublic()
             .observe(viewLifecycleOwner, Observer {
-                binding.viewPager.adapter = PublicFragmentAdapter(this,createFragments(it))
+                binding.viewPager.adapter = PublicFragmentAdapter(this,it)
                 TabLayoutMediator(binding.tableLayout, binding.viewPager) { tab, position ->
                     tab.text = it[position].name
                 }.attach()
             })
 
-        /**
-         * tableLayout和Viewpager2的联动方式
-         */
-
-
-    }
-
-    override fun onItemClick(data: HomeListData, position: Int) {
-
-        startNewActivity<DetailsActivity>{
-            putExtras(bundleOf(KEY_URL to data.link))
-        }
-    }
-
-    override fun onCollect(
-        data: HomeListData,
-        position: Int,
-        collect: Boolean,
-        view: FavoritesView
-    ) {
-        lifecycleScope.launch {
-            if (!UserManager.isLogin()) {
-                startNewActivity<MainActivity>()
-                return@launch
-            }
-            val status = homeModel.collect(data.id, !collect)
-            logDebug(TAG, "collect_result$status")
-            if (status) {
-                view.toggle()
-            }
-        }
     }
 
     override fun onDestroyView() {

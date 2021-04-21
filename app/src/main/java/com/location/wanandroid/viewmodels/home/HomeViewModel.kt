@@ -3,15 +3,19 @@ package com.location.wanandroid.viewmodels.home
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.location.base.BaseViewModel
 import com.location.network.parseResult
 import com.location.wanandroid.data.PublicArticle
+import com.location.wanandroid.data.PublicList
 import com.location.wanandroid.padingsource.HomeSource
 import com.location.wanandroid.padingsource.HomeSourceType
+import com.location.wanandroid.padingsource.PublicArticleSource
 import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.repository.UserRepository
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
 
 /**
  *
@@ -32,6 +36,15 @@ class HomeViewModel(private val homeRep:HomeRepository,private val userRep:UserR
     ){
         HomeSource(homeRep,HomeSourceType.QA_DATA)
     }.flow.cachedIn(viewModelScope)
+
+    fun getPublicList(id:Int): Flow<PagingData<PublicList>> {
+      return Pager(
+            PagingConfig(pageSize = 20)
+        ){
+            PublicArticleSource(id,homeRep)
+        }.flow.cachedIn(viewModelScope)
+    }
+
 
     fun getpublic(): LiveData<List<PublicArticle>> {
         return liveData {

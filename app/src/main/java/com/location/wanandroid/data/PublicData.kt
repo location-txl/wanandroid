@@ -1,4 +1,5 @@
 package com.location.wanandroid.data
+import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.JsonClass
 
 import com.squareup.moshi.Json
@@ -84,7 +85,7 @@ data class PublicList(
     @Json(name = "selfVisible")
     val selfVisible: Int,
     @Json(name = "shareDate")
-    val shareDate: Long,
+    val shareDate: Long?,
     @Json(name = "shareUser")
     val shareUser: String,
     @Json(name = "superChapterId")
@@ -103,6 +104,18 @@ data class PublicList(
     val visible: Int,
     @Json(name = "zan")
     val zan: Int
-)
+){
+
+    class DiffCallback: DiffUtil.ItemCallback<PublicList>() {
+        override fun areItemsTheSame(oldItem: PublicList, newItem: PublicList): Boolean {
+            return  oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: PublicList, newItem: PublicList): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+}
 
 
