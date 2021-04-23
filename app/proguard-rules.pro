@@ -29,3 +29,13 @@
 -keep class com.tencent.tbs.** {
     *;
 }
+
+
+
+-keep class * extends com.location.base.recyclerview.BaseClickHolder {
+*;
+}
+-keep class * extends com.location.base.recyclerview.BaseViewHolder {
+*;
+}
+
