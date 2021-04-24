@@ -8,6 +8,8 @@ import androidx.databinding.ViewDataBinding
  * @author tianxiaolong
  * time：4/16/21 10:28 PM
  * description：支持Item点击
+ * @param itemClick item点击回调
+ * @constructor
  */
 abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: ItemClickListener?) :
     BaseViewHolder<V, T>(binding) {
@@ -15,7 +17,11 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
     init {
         itemClick?.let { itemClick ->
             itemView.setOnClickListener {
-                itemClick.onItemClick(it, binding, layoutPosition)
+                val adapter  = bindingAdapter
+                if(adapter is ItemDataProvider<*>){
+                    itemClick.onItemClick(it, binding, bindingAdapterPosition,adapter.getItemData(bindingAdapterPosition))
+                }
+
             }
         }
 
@@ -23,7 +29,7 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
 
     /**
      * 支持设置Item点击的工厂类
-     * @property itemClick ItemClickListener?
+     * @property itemClick ItemClickListener? item点击回调
      * @constructor
      */
     class DefaultClickFactory(private val itemClick: ItemClickListener?) : DefaultFactory() {
@@ -45,6 +51,9 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
         }
     }
 
+    /**
+     * [androidx.recyclerview.widget.RecyclerView] item的点击回调
+     */
     interface ItemClickListener {
         /**
          * Item点击
@@ -52,6 +61,6 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
          * @param binding V DataBinding
          * @param position Int item索引
          */
-        fun <V : ViewDataBinding> onItemClick(view: View, binding: V, position: Int)
+        fun <V : ViewDataBinding,T>  onItemClick(view: View, binding: V, position: Int,data:T)
     }
 }

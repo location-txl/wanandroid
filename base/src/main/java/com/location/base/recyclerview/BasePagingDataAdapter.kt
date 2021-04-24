@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
     diffCallback: DiffUtil.ItemCallback<T>
 ) :
-    PagingDataAdapter<T, VH>(diffCallback) {
+    PagingDataAdapter<T, VH>(diffCallback),ItemDataProvider<T> {
 
     abstract val layoutId: Int
 
@@ -25,9 +25,11 @@ abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
     open fun viewHolderFactory(): BaseViewHolder.Factory = BaseViewHolder.DefaultFactory()
 
 
+
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.onBind(getItem(position)!!)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return viewHolderFactory().create(
@@ -39,6 +41,10 @@ abstract class BasePagingDataAdapter<T : Any, VH : BaseViewHolder<*, T>>(
             ), viewType
         )
 
+    }
+
+    override fun getItemData(position: Int): T {
+        return  getItem(position)!!
     }
 
 

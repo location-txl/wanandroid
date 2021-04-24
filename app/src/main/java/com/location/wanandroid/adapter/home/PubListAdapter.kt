@@ -39,12 +39,6 @@ class PubListAdapter(private val listener: BaseClickHolder.ItemClickListener) :
         binding: ItemListBinding, itemClick: ItemClickListener?
     ) :
         BaseClickHolder<ItemListBinding, PublicList>(binding, itemClick) {
-
-//        override fun onBind(data: HomeListData) {
-//            binding.setVariable(BR.homeData, data)
-//            binding.executePendingBindings()
-//        }
-
         override fun onBind(data: PublicList) {
             binding.data = data
             binding.notifyPropertyChanged(BR.data)

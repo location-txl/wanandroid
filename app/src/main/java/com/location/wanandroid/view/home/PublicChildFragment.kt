@@ -8,10 +8,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.location.base.BaseDaggerVmFragment
+import com.location.base.TAG
+import com.location.base.logDebug
 import com.location.base.recyclerview.BaseClickHolder
+import com.location.base.startNewActivity
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.home.PubListAdapter
+import com.location.wanandroid.data.PublicList
 import com.location.wanandroid.databinding.FragmentHomeBinding
+import com.location.wanandroid.view.DetailsActivity
 import com.location.wanandroid.viewmodels.home.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -24,6 +29,7 @@ import kotlinx.coroutines.flow.collectLatest
 class PublicChildFragment: BaseDaggerVmFragment<FragmentHomeBinding,HomeViewModel.Factory>(),BaseClickHolder.ItemClickListener {
 
     companion object{
+        private const val TAG = "PublicChildFragment"
         private const val EXERA_ID = "author_id"
         fun newInstance(id:Int):PublicChildFragment{
             return PublicChildFragment().apply {
@@ -53,7 +59,11 @@ class PublicChildFragment: BaseDaggerVmFragment<FragmentHomeBinding,HomeViewMode
         }
     }
 
-    override fun <V : ViewDataBinding> onItemClick(view: View, binding: V, position: Int) {
-
+    override fun <V : ViewDataBinding,T> onItemClick(view: View, binding: V, position: Int,data:T) {
+            logDebug(TAG,"itemClickPosition=$position")
+            val publicList = data as PublicList
+            startNewActivity<DetailsActivity> {
+                putExtra(DetailsActivity.KEY_URL,publicList.link)
+            }
     }
 }

@@ -29,7 +29,10 @@ abstract class BaseViewHolder<V : ViewDataBinding, T>(val binding: V) :
 
     open class DefaultFactory : Factory {
         /**
-         *@throws NoSuchMethodException
+         * @param clazz 要创建的类型
+         * @param binding 数据绑定器
+         * @param viewType view类型 [RecyclerView.Adapter.onCreateViewHolder]
+         * @throws NoSuchMethodException
          */
         override fun <VH : BaseViewHolder<*, *>> create(
             clazz: Class<VH>,

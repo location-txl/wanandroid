@@ -43,6 +43,7 @@ suspend fun <T> safeCall(block: suspend () -> Result<T>): Result<T> {
     }
 }
 
+
 /**
  * 执行响应快 返回Result
  * @param block SuspendFunction0<Result<T>>
