@@ -62,6 +62,19 @@ android {
 
             signingConfig signingConfigs.release
         }
+        releaseTest{
+            //开启 代码压缩 优化 混淆
+            minifyEnabled true
+            //开启资源优化
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${appName()}.apk"
+                }
+            }
+            signingConfig signingConfigs.release
+        }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

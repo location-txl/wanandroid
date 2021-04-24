@@ -31,11 +31,12 @@ task clean(type: Delete) {
 }
 
 //这个block 表示为每个子module进行相关配置。
-subprojects(){
+subprojects() {
     // def releaseTasks = project.getTasksByName("assembleRelease",false)
-    def releaseTasks = project.getTasksByName("assembleRelease",false)
+    def releaseTasks = project.getTasksByName("assembleRelease", false)
+    def releaseTestTasks = project.getTasksByName("assembleReleaseTest", false)
     copyApkFile(releaseTasks, project)
-  
+    copyTestApkFile(releaseTestTasks,project)
 }
 
 
@@ -43,33 +44,33 @@ static def buildTimeDir() {
     return new Date().format('YYYY-MM-dd/', TimeZone.getTimeZone('GMT+08:00'))
 }
 
-def copyApkFile(Set<Task> tasks , Project project) {
+def copyApkFile(Set<Task> tasks, Project project) {
     for (task in tasks) {
         def dir = project.getProjectDir().getAbsolutePath()
-        println "task name = $task.name" 
+        println "task name = $task.name"
         def file = new File(dir + "/build/outputs/apk")
 
-        if(task.name == "assembleRelease"){
+        if (task.name == "assembleRelease") {
             println "assemble release dir = $dir"
-    
+
             //在生成此apk之前，先将之前生成的apk删除
             if (file.exists()) {
                 def var = delete(dir + "/build/outputs/apk")
                 println "clear before create $var ,------------------"
             }
         }
-        
+
 
         task.doLast {
             if (file.exists()) {
-                def fromPath = rootProject.getRootDir().getAbsolutePath()  + "/prebuilt/" + project.getName() + "/" + buildTimeDir();
+                def fromPath = rootProject.getRootDir().getAbsolutePath() + "/prebuilt/" + project.getName() + "/" + buildTimeDir();
                 def fromFile = new File(fromPath)
-                if(!fromFile.exists()){
+                if (!fromFile.exists()) {
                     fromFile.mkdirs()
-                      println "create fileDir dir = $fromPath"
+                    println "create fileDir dir = $fromPath"
                 }
                 //将生成的apk拷贝出来
-                copy{ //copy是gradle中的project提供的方法，用于拷贝，里面有两个特定的属性
+                copy { //copy是gradle中的project提供的方法，用于拷贝，里面有两个特定的属性
                     //from srcDir ， into desDir （当这个目录不存在的时候会尝试创建这个文件夹）
                     from dir + "/build/outputs/apk/release/"
                     include "**/*.apk"
@@ -77,7 +78,47 @@ def copyApkFile(Set<Task> tasks , Project project) {
                     into fromPath
                     rename '(.+)-release-(.+)', '$1.apk'
                 }
-                println("copy apk to "+fromPath)
+                println("copy apk to " + fromPath)
+            }
+        }
+    }
+}
+
+
+def copyTestApkFile(Set<Task> tasks, Project project) {
+    for (task in tasks) {
+        def dir = project.getProjectDir().getAbsolutePath()
+
+        def file = new File(dir + "/build/outputs/apk")
+
+        if (task.name == "assembleRelease") {
+
+
+            //在生成此apk之前，先将之前生成的apk删除
+            if (file.exists()) {
+                delete(dir + "/build/outputs/apk")
+            }
+        }
+
+
+        task.doLast {
+            if (file.exists()) {
+                def fromPath = rootProject.getRootDir().getAbsolutePath() + "/testApk/" + project.getName()
+                def fromFile = new File(fromPath)
+                if (!fromFile.exists()) {
+                    fromFile.mkdirs()
+                    println "create fileDir dir = $fromPath"
+                }
+                //将生成的apk拷贝出来
+                copy { //copy是gradle中的project提供的方法，用于拷贝，里面有两个特定的属性
+                    //from srcDir ， into desDir （当这个目录不存在的时候会尝试创建这个文件夹）
+                    from dir + "/build/outputs/apk/releaseTest/"
+                    include "**/*.apk"
+                    include "**/*.json"
+                    into fromPath
+                    rename '\\*.apk', '$1.apk'
+                }
+                println("copy apk to " + fromPath)
             }
         }
     }
