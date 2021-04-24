@@ -39,7 +39,7 @@ class HomeViewModel(private val homeRep:HomeRepository,private val userRep:UserR
 
     fun getPublicList(id:Int): Flow<PagingData<PublicList>> {
       return Pager(
-            PagingConfig(pageSize = 20)
+            PagingConfig(pageSize = 10)
         ){
             PublicArticleSource(id,homeRep)
         }.flow.cachedIn(viewModelScope)

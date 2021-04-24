@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.location.base.BaseDaggerVmFragment
 import com.location.base.TAG
@@ -49,6 +50,7 @@ class PublicChildFragment: BaseDaggerVmFragment<FragmentHomeBinding,HomeViewMode
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerview.adapter = adapter
+        binding.recyclerview.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
 
             val id = arguments?.getInt(EXERA_ID,0)
