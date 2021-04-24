@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import com.location.network.response.Result
 import com.location.wanandroid.data.PublicList
 import com.location.wanandroid.data.collect.CollectArticleItem
+import com.location.wanandroid.data.findNextIndex
 import com.location.wanandroid.repository.HomeRepository
 import com.location.wanandroid.repository.UserRepository
 
@@ -14,7 +15,7 @@ import com.location.wanandroid.repository.UserRepository
  * time：2021/3/6 5:41 PM
  * description：
  */
-class PublicArticleSource(private val id:Int,private val homeRepository: HomeRepository) :
+class PublicArticleSource(private val id: Int, private val homeRepository: HomeRepository) :
     PagingSource<Int, PublicList>() {
     override fun getRefreshKey(state: PagingState<Int, PublicList>): Int? {
         return 0
@@ -26,8 +27,9 @@ class PublicArticleSource(private val id:Int,private val homeRepository: HomeRep
             is Result.Success -> LoadResult.Page(
                 data = response.data.datas,
                 prevKey = null,
-                nextKey = loadIndex + 1
+                nextKey = response.data.findNextIndex(loadIndex)
             )
+
             is Result.Fail -> LoadResult.Error(response.error)
         }
 

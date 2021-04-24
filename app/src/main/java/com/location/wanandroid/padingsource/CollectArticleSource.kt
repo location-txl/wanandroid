@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.location.network.response.Result
 import com.location.wanandroid.data.collect.CollectArticleItem
+import com.location.wanandroid.data.findNextIndex
 import com.location.wanandroid.repository.UserRepository
 
 /**
@@ -24,8 +25,9 @@ class CollectArticleSource(private val userRepository: UserRepository) :
             is Result.Success -> LoadResult.Page(
                 data = response.data.datas,
                 prevKey = null,
-                nextKey = loadIndex + 1
+                nextKey = response.data.findNextIndex(loadIndex)
             )
+
             is Result.Fail -> LoadResult.Error(response.error)
         }
 

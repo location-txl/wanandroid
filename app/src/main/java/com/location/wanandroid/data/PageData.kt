@@ -27,3 +27,11 @@ data class PageData<T>(
     @Json(name = "total")
     val total: Int
 )
+
+fun <T> PageData<T>.findNextIndex(currentIndex: Int): Int? {
+    val nextIndex = currentIndex + 1
+    return if (nextIndex > pageCount)
+        return null
+    else
+        nextIndex
+}
