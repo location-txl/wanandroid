@@ -35,8 +35,13 @@ object RetrofitUtils {
     private fun OkHttpClient.addDebugConfig(): OkHttpClient {
         return if (BuildConfig.DEBUG)
             this.newBuilder().addNetworkInterceptor(HttpLoggingInterceptor(HttpLog()).apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }).build()
+                level = HttpLoggingInterceptor.Level.BASIC
+            })
+                .addNetworkInterceptor {
+                    httpRequestCount()
+                    it.proceed(it.request())
+                }
+                .build()
         else
             this
     }
@@ -69,10 +74,16 @@ object RetrofitUtils {
         cookieManager.clearSession()
     }
 }
+var count = 0
 
+private fun httpRequestCount(){
+    count++
+    logDebug("HttpLog", "request_count=$count")
+}
 private class HttpLog : HttpLoggingInterceptor.Logger {
     override fun log(message: String?) {
         message?.let {
+
             logDebug("HttpLog", it)
         }
     }
