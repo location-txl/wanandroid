@@ -13,6 +13,7 @@ import com.location.wanandroid.adapter.home.HomeFragmentAdapter
 import com.location.wanandroid.databinding.ActivityHomeBinding
 import com.location.wanandroid.padingsource.HomeSourceType
 import com.location.wanandroid.repository.HomeRepository
+import com.location.wanandroid.test.TestInject
 import javax.inject.Inject
 
 /**
@@ -34,6 +35,10 @@ class HomeActivity : BaseDaggerActivity<ActivityHomeBinding>()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val inject = TestInject()
+        inject.injectDagger()
+        logDebug("DaggerData","1code:${inject.data1.hashCode()}")
+        logDebug("DaggerData","2code:${inject.data2.hashCode()}")
         //设置缓存为4个
         binding.homeViewpager.offscreenPageLimit = 4
         binding.homeViewpager.adapter =

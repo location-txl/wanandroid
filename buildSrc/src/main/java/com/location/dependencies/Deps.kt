@@ -13,6 +13,7 @@ import com.location.dependencies.Versions.lifecycle_version
 import com.location.dependencies.Versions.navigation_version
 import com.location.dependencies.Versions.retrofit_version
 import com.location.dependencies.Versions.moshi_version
+import com.location.dependencies.Versions.room_version
 
 
 /**
@@ -56,6 +57,7 @@ object  Versions{
     const val retrofit_version = "2.9.0"
     const val moshi_version = "1.8.0"
     const val dagger_version = "2.33"
+    const val room_version = "2.2.6"
 
 }
 
@@ -92,4 +94,8 @@ object Deps {
     const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:$dagger_version"
     const val daggerAndroid = "com.google.dagger:dagger-android:$dagger_version"
     const val daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    const val room = "androidx.room:room-runtime:$room_version"
+    const val roomCompiler = "androidx.room:room-compiler:$room_version"
+    const val roomKtx = "androidx.room:room-ktx:$room_version"
 }

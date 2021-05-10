@@ -1,8 +1,10 @@
 package com.location.wanandroid
 
+import android.app.AppComponentFactory
 import android.app.Application
 import android.content.Context
 import com.location.network.RetrofitUtils
+import com.location.wanandroid.comment.AppComment
 import com.location.wanandroid.comment.DaggerAppComment
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
@@ -22,6 +24,9 @@ lateinit var appContext: Context
 
 class App : DaggerApplication() {
 
+    val comment by lazy { DaggerAppComment.factory().create(this) }
+
+
     override fun onCreate() {
         super.onCreate()
         appContext = this
@@ -33,6 +38,6 @@ class App : DaggerApplication() {
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-       return DaggerAppComment.factory().create(this)
+       return comment
     }
 }

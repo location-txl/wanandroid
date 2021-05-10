@@ -1,10 +1,14 @@
 package com.location.wanandroid.comment
 
+import android.content.Context
 import com.location.wanandroid.App
-import com.location.wanandroid.module.ActivityModules
+import com.location.wanandroid.module.*
+import com.location.wanandroid.viewmodels.collect.CollectViewModel
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 
@@ -16,10 +20,12 @@ import javax.inject.Singleton
  */
 //@HomeScops
 @Singleton
-@Component(modules = [AndroidInjectionModule::class,ActivityModules::class] /* ,dependencies = [HomeComment::class] */)
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityModules::class, HomeModule::class, HttpModule::class, RepositoryModule::class])
 interface AppComment :AndroidInjector<App>{
     @Component.Factory
-    abstract class Builder : AndroidInjector.Factory<App>
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): AppComment
+    }
 
 
 }
