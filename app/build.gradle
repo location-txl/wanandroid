@@ -85,8 +85,8 @@ android {
 }
 
 dependencies {
-    implementation project(":base")
-    implementation project(":network")
+    implementation project(":libs:base")
+    implementation project(":libs:network")
     //fragment 扩展函数
     implementation Deps.fragment
 

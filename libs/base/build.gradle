@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
-apply from: "../common.gradle"
+apply from: "../../common.gradle"
 android {
 
 
