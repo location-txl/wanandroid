@@ -1,4 +1,4 @@
-import com.location.dependencies.Versions
+import com.location.dependencies.Deps
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -7,6 +7,11 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 apply from: "../../common.gradle"
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 android {
 
     defaultConfig {
@@ -29,30 +34,30 @@ android {
 dependencies {
 
     //fragment 扩展函数
-    implementation "androidx.fragment:fragment-ktx:$Versions.fragment_version"
+    implementation Deps.fragment
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation Deps.constraintlayout
     //lifecycle-livedata scope
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Versions.lifecycle_version"
+    implementation Deps.lifecycle_livedata
     //kapt优化lifecycle
-    kapt "androidx.lifecycle:lifecycle-common-java8:$Versions.lifecycle_version"
+    kapt Deps.lifecycle_common
     //viewmodle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Versions.lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Versions.lifecycle_version"
+    implementation Deps.viewModel
+    implementation Deps.viewModelSaveState
     //lifecycle scope
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$Versions.lifecycle_version"
+    implementation Deps.lifecycleScop
 
 
 //    implementation "androidx.navigation:navigation-runtime-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$Versions.navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$Versions.navigation_version"
+    implementation Deps.navigationFragment
+    implementation Deps.navigationUI
 
 
-    //retrofit 网络库
-    implementation "com.squareup.retrofit2:retrofit:2.8.1"
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    //moshi json解析 替代gson 在kotlin平台比gson好
-    implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.8.0'
+    implementation Deps.retrofit
+    implementation Deps.retrofitCoroutinesAdapter
+    implementation Deps.retrofitMoshiConvert
+    implementation Deps.moshi
+    kapt Deps.moshiCode
+    implementation Deps.arouterApi
+    kapt Deps.arouterCompilerApi
 }

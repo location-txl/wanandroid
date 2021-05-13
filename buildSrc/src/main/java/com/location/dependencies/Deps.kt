@@ -1,5 +1,8 @@
 package com.location.dependencies
 
+import com.location.dependencies.Versions.activity_version
+import com.location.dependencies.Versions.arouter_compiler_version
+import com.location.dependencies.Versions.arouter_version
 import com.location.dependencies.Versions.data_store
 import com.location.dependencies.Versions.glide_version
 import com.location.dependencies.Versions.leakCanary_version
@@ -34,12 +37,14 @@ object AppConfig{
     const val version_name = "1.0.0"
 
 }
+
 object  Versions{
     const val kotlin = "1.3.72"
     const val core_ktx_version = "1.3.2"
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.1"
     const val junit_version = "4.13.1"
+    const val activity_version = "1.2.2"
     const val android_junit_version = "1.1.2"
     const val espresso_core_version = "3.3.0"
     const val lifecycle_version = "2.2.0"
@@ -58,7 +63,13 @@ object  Versions{
     const val moshi_version = "1.8.0"
     const val dagger_version = "2.33"
     const val room_version = "2.2.6"
+    const val arouter_version = "1.4.0"
+    const val arouter_compiler_version = "1.2.1"
 
+}
+
+object SampleConfig{
+    const val activitySampleModel = false
 }
 
 object Deps {
@@ -98,4 +109,8 @@ object Deps {
     const val room = "androidx.room:room-runtime:$room_version"
     const val roomCompiler = "androidx.room:room-compiler:$room_version"
     const val roomKtx = "androidx.room:room-ktx:$room_version"
+
+    const val activity = "androidx.activity:activity-ktx:$activity_version"
+    const val arouterApi = "com.alibaba:arouter-api:$arouter_version"
+    const val arouterCompilerApi = "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }

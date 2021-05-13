@@ -1,3 +1,4 @@
+include ':sample:activitysample'
 include ':sample:AndroidSample'
 include ':libs:network'
 include ':libs:base'

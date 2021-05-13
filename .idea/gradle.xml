@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/libs/network" />
             <option value="$PROJECT_DIR$/sample" />
             <option value="$PROJECT_DIR$/sample/AndroidSample" />
+            <option value="$PROJECT_DIR$/sample/activitysample" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
