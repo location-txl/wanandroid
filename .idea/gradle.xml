@@ -19,6 +19,8 @@
             <option value="$PROJECT_DIR$/sample" />
             <option value="$PROJECT_DIR$/sample/AndroidSample" />
             <option value="$PROJECT_DIR$/sample/activitysample" />
+            <option value="$PROJECT_DIR$/sample/libs" />
+            <option value="$PROJECT_DIR$/sample/libs/BaseArouteNavigation" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

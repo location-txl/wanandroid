@@ -2,7 +2,7 @@ import com.location.dependencies.Deps
 import com.location.dependencies.SampleConfig
 
 static def isModel(){
-    return SampleConfig.activitySampleModel
+    return true
 }
 
 if(isModel()){
@@ -13,14 +13,14 @@ if(isModel()){
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
-apply from: "../../common.gradle"
+apply from: "../../../common.gradle"
 
 static def appName() {
-    return "activitySample"
+    return "baseARouteNavigation"
 }
 
 static def appId(){
-    return "com.location.activitysample"
+    return ""
 }
 kapt {
     arguments {
@@ -73,22 +73,9 @@ android {
 }
 
 dependencies {
-    implementation project(":sample:libs:BaseArouteNavigation")
-    //fragment 扩展函数
-    implementation Deps.fragment
 
-    implementation Deps.constraintlayout
-    //lifecycle-livedata scope
-    implementation Deps.lifecycle_livedata
-    //kapt优化lifecycle
-    kapt Deps.lifecycle_common
-    //viewmodle
-    implementation Deps.viewModel
-    implementation Deps.viewModelSaveState
-    //lifecycle scope
-    implementation Deps.lifecycleScop
     implementation Deps.arouterApi
-    kapt Deps.arouterCompilerApi
 
+    kapt Deps.arouterCompilerApi
 
 }

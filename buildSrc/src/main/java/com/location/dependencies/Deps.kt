@@ -69,7 +69,7 @@ object  Versions{
 }
 
 object SampleConfig{
-    const val activitySampleModel = false
+    const val activitySampleModel = true
 }
 
 object Deps {

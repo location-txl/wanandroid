@@ -1,4 +1,6 @@
 import com.location.dependencies.Deps
+import com.location.dependencies.SampleConfig
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -32,7 +34,10 @@ android {
 }
 
 dependencies {
-
+    implementation project(":sample:libs:BaseArouteNavigation")
+    if(SampleConfig.activitySampleModel){
+//        implementation project(":sample:activitysample")
+    }
     //fragment 扩展函数
     implementation Deps.fragment
 

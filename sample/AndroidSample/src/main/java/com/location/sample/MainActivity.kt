@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
+import com.alibaba.android.arouter.launcher.ARouter
+import com.location.activitysample.Navigation
 import okhttp3.OkHttpClient
 import java.lang.RuntimeException
 import kotlin.concurrent.thread
@@ -72,10 +74,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openSyncBarrier(v:View){
-        looper?.let {
-            postSyncBarrier(it)
-            Log.d(HANDLER_TAG,"开启消息屏障 token=${token}")
-        }
+//        looper?.let {
+//            postSyncBarrier(it)
+//            Log.d(HANDLER_TAG,"开启消息屏障 token=${token}")
+//        }
+        ARouter.getInstance().build(Navigation.ACTIVITY_SAMPLE).navigation()
     }
     fun closeSyncBarrier(v:View){
         looper?.let {
