@@ -7,5 +7,9 @@ package com.location.activitysample
  * description：
  */
 object Navigation {
-    const val ACTIVITY_SAMPLE = "/activity_sample/home"
+    private const val COMMON_GROUP = "/activity_sample"
+    const val COMMON_SAMPLE = "${COMMON_GROUP}/home"
+    const val COMOON_ONE_ACTIVITY = "${COMMON_GROUP}/oneActivity"
+    const val COMOON_TWO_ACTIVITY = "${COMMON_GROUP}/twoActivity"
+    const val COMOON_THREE_ACTIVITY = "${COMMON_GROUP}/threeActivity"
 }

@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import com.alibaba.android.arouter.launcher.ARouter
 import com.location.activitysample.Navigation
-import okhttp3.OkHttpClient
 import java.lang.RuntimeException
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -78,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 //            postSyncBarrier(it)
 //            Log.d(HANDLER_TAG,"开启消息屏障 token=${token}")
 //        }
-        ARouter.getInstance().build(Navigation.ACTIVITY_SAMPLE).navigation()
+        ARouter.getInstance().build(Navigation.COMMON_SAMPLE).navigation()
     }
     fun closeSyncBarrier(v:View){
         looper?.let {

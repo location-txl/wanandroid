@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WanAndroid" >
        <activity android:name=".MainActivity"/>
+       <activity android:name=".activity.OneActivity"/>
+       <activity android:name=".activity.TwoActivity" android:launchMode="singleTop"/>
+       <activity android:name=".activity.ThreeActivity" android:launchMode="singleTask"/>
+
     </application>
 
 </manifest>

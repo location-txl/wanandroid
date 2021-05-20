@@ -74,6 +74,7 @@ android {
 
 dependencies {
     implementation project(":sample:libs:BaseArouteNavigation")
+    implementation project(":libs:base")
     //fragment 扩展函数
     implementation Deps.fragment
 
