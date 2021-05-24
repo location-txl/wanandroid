@@ -1,10 +1,10 @@
-package com.location.sample.startup
+package com.location.startup
 
 import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
 import com.alibaba.android.arouter.launcher.ARouter
-import com.location.sample.BuildConfig
+import com.location.baseARouteNavigation.BuildConfig
 
 /**
  *
