@@ -1,4 +1,4 @@
-package com.location.startup
+package com.location.activitysample.startup
 
 import android.app.Application
 import android.content.Context
