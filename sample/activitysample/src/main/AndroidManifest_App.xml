@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.OneActivity"/>
+        <activity android:name=".activity.TwoActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ThreeActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.ForeActivity"
+            android:taskAffinity="com.location.activitysample.taskAffinity"/>
+        <activity android:name=".activity.FiveActivity" android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

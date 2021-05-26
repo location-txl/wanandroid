@@ -34,6 +34,12 @@ abstract class BaseTestActivity : AppCompatActivity() {
         binding.gotoSingleTaskActivity.setOnClickListener {
             ARouter.getInstance().build(Navigation.COMOON_THREE_ACTIVITY).navigation()
         }
+        binding.gotoCustomTaskAffinityTaskActivity.setOnClickListener {
+            ARouter.getInstance().build(Navigation.COMOON_FORE_ACTIVITY).navigation()
+        }
+        binding.gotoSingleInstanceActivity.setOnClickListener {
+            ARouter.getInstance().build(Navigation.COMOON_FIVE_ACTIVITY).navigation()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

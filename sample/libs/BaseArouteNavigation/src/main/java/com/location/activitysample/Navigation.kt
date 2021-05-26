@@ -12,4 +12,6 @@ object Navigation {
     const val COMOON_ONE_ACTIVITY = "${COMMON_GROUP}/oneActivity"
     const val COMOON_TWO_ACTIVITY = "${COMMON_GROUP}/twoActivity"
     const val COMOON_THREE_ACTIVITY = "${COMMON_GROUP}/threeActivity"
+    const val COMOON_FORE_ACTIVITY = "${COMMON_GROUP}/foreActivity"
+    const val COMOON_FIVE_ACTIVITY = "${COMMON_GROUP}/fiveActivity"
 }

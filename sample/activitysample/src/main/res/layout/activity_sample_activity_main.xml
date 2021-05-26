@@ -18,4 +18,14 @@
     android:text="进入SingleTask模式的ThreeActivity"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
+<Button
+    android:id="@+id/gotoCustomTaskAffinityTaskActivity"
+    android:text="进入自定义taskAffinity ForeActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+<Button
+    android:id="@+id/gotoSingleInstanceActivity"
+    android:text="进入SingleInstance FiveActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 </LinearLayout>
