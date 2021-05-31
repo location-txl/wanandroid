@@ -1,0 +1,94 @@
+import com.location.dependencies.Deps
+import com.location.dependencies.SampleConfig
+
+static def isModel(){
+    return SampleConfig.viewSampleModel
+}
+
+if(isModel()){
+    apply plugin: 'com.android.library'
+}else {
+    apply plugin: 'com.android.application'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply from: "../../common.gradle"
+
+static def appName() {
+    return "ViewSample"
+}
+
+static def appId(){
+    return "com.location.viewsample"
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+android {
+    defaultConfig {
+        if(!isModel()){
+            applicationId appId()
+        }
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        if(isModel()) {
+            consumerProguardFiles "consumer-rules.pro"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if(!isModel()){
+                android.applicationVariants.all { variant ->
+                    variant.outputs.all {
+                        outputFileName = "${appName()}.apk"
+                    }
+                }
+            }
+
+        }
+    }
+
+    sourceSets{
+        main {
+            if(isModel()){
+                manifest.srcFile 'src/main/AndroidManifest_Model.xml'
+                java.srcDirs 'src/main/java/'
+            }else {
+                java.srcDirs 'src/main/java/'
+                java.srcDirs 'src/main/app_java/'
+                manifest.srcFile 'src/main/AndroidManifest_App.xml'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(":sample:libs:BaseArouteNavigation")
+    //fragment 扩展函数
+    implementation Deps.fragment
+
+    implementation Deps.constraintlayout
+    //lifecycle-livedata scope
+    implementation Deps.lifecycle_livedata
+    //kapt优化lifecycle
+    kapt Deps.lifecycle_common
+    //viewmodle
+    implementation Deps.viewModel
+    implementation Deps.viewModelSaveState
+    //lifecycle scope
+    implementation Deps.lifecycleScop
+    implementation Deps.arouterApi
+
+    kapt Deps.arouterCompilerApi
+
+}

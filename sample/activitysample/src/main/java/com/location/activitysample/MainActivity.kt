@@ -2,6 +2,7 @@ package com.location.activitysample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.location.activitysample.databinding.ActivitySampleActivityHomeBinding
@@ -18,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         binding.gotoActivity.setOnClickListener {
             ARouter.getInstance().build(Navigation.COMOON_ONE_ACTIVITY).navigation()
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return super.dispatchTouchEvent(ev)
     }
 }

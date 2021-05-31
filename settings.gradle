@@ -1,4 +1,5 @@
 include ':sample:activitysample'
+include ':sample:ViewSample'
 include ':sample:AndroidSample'
 include ':sample:libs:BaseArouteNavigation'
 include ':libs:network'
