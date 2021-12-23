@@ -139,3 +139,8 @@ fun fixInputMethodManagerLeak(context: Context) {
 }
 
 
+public fun <T> lazyNotSafe(initializer: () -> T): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE, initializer)
+}
+
+

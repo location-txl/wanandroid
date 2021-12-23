@@ -39,7 +39,7 @@ object AppConfig{
 }
 
 object  Versions{
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.5.31"
     const val core_ktx_version = "1.3.2"
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.1"
@@ -60,14 +60,13 @@ object  Versions{
     const val leakCanary_version = "2.6"
     const val constraintlayout_version = "2.0.4"
     const val retrofit_version = "2.9.0"
-    const val moshi_version = "1.8.0"
-    const val dagger_version = "2.33"
+    const val moshi_version = "1.13.0"
+    const val dagger_version = "2.40.5"
     const val room_version = "2.2.6"
     const val arouter_version = "1.4.0"
     const val arouter_compiler_version = "1.2.1"
 
 }
-
 object SampleConfig{
     const val activitySampleModel = false
     const val viewSampleModel = false

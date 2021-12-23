@@ -1,5 +1,6 @@
 package com.location.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -7,14 +8,18 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.location.base.BuildConfig
 import com.location.base.logDebug
 import com.location.network.factory.LiveDataCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.*
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+@SuppressLint("StaticFieldLeak")
 object RetrofitUtils {
     private const val BASE_URL = "https://wanandroid.com/"
 
+    @SuppressLint("StaticFieldLeak")
     internal var context: Context? = null
 
     fun initContext(appContext:Context){
@@ -53,7 +58,12 @@ object RetrofitUtils {
     private val retrofit: Retrofit by lazy {
 
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(
+                Moshi.Builder()
+                    .add(KotlinJsonAdapterFactory())
+                    .build()
+
+            ))
             .addCallAdapterFactory(LiveDataCallAdapterFactory.create(true))
             .validateEagerly(BuildConfig.DEBUG)
             .baseUrl(BASE_URL)

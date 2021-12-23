@@ -21,10 +21,15 @@ android {
     }
 
     if(AppConfig.IS_BINDING){
-        buildFeatures{
-            viewBinding = true
-            dataBinding = true
+//        buildFeatures{
+        viewBinding {
+            enabled = true
         }
+//            viewBinding = true
+            dataBinding {
+                enabled = true
+            }
+//        }
     }
 
 
