@@ -69,8 +69,7 @@ class HomeViewModel(private val homeRep:HomeRepository,private val userRep:UserR
     }
 
     class Factory(private val homeRep:HomeRepository,private val userRep:UserRepository): ViewModelProvider.Factory {
-
-
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return HomeViewModel(homeRep, userRep) as T
         }

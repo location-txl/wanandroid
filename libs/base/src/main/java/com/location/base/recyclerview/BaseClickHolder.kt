@@ -15,11 +15,18 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
     BaseViewHolder<V, T>(binding) {
 
     init {
-        itemClick?.let { itemClick ->
+        itemClick?.let {
             itemView.setOnClickListener {
-                val adapter  = bindingAdapter
-                if(adapter is ItemDataProvider<*>){
-                    itemClick.onItemClick(it, binding, bindingAdapterPosition,adapter.getItemData(bindingAdapterPosition))
+                val adapter = bindingAdapter
+                if (adapter is ItemDataProvider<*>) {
+                    with(itemClick) {
+                        onItemClick(
+                            it,
+                            binding,
+                            bindingAdapterPosition,
+                            adapter.getItemData(bindingAdapterPosition)
+                        )
+                    }
                 }
 
             }
@@ -61,6 +68,6 @@ abstract class BaseClickHolder<V : ViewDataBinding, T>(binding: V, itemClick: It
          * @param binding V DataBinding
          * @param position Int item索引
          */
-        fun <V : ViewDataBinding,T>  onItemClick(view: View, binding: V, position: Int,data:T)
+        fun <V : ViewDataBinding, T> onItemClick(view: View, binding: V, position: Int, data: T)
     }
 }

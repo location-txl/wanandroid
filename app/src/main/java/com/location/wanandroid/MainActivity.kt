@@ -26,15 +26,15 @@ class MainActivity : BaseDaggerVmActivity<ActivityLoginBinding,UserViewModel.Fac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.userModel = viewModels
-        viewModels.msgLiveData().observe(this) {
+        viewModels.msgLiveData().observe(this, onChanged = {
             toast(it)
-        }
-        viewModels.loginStateLiveData().observe(this) {
+        })
+        viewModels.loginStateLiveData().observe(this, onChanged = {
             when (it) {
                 LoginState.LOGIN -> loginSuccess()
                 LoginState.REGIST -> registerSuccess()
             }
-        }
+        });
     }
 
     override val viewModelClass: KClass<UserViewModel>

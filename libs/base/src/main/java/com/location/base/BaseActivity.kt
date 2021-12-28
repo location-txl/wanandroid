@@ -79,9 +79,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(){
         super.onRestoreInstanceState(savedInstanceState)
         logDebug(TAG,"onRestoreInstanceState")
     }
-
     private fun init(){
-        StatusManager.loadingLiveData.observe(this) {
+        StatusManager.loadingLiveData.observe(this, onChanged =  {
             when (it) {
                 LoadingStatus.SHOW_LOADING -> {
 
@@ -93,7 +92,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(){
 
                 }
             }
-        }
+        })
     }
 
     protected fun showDialLog() {

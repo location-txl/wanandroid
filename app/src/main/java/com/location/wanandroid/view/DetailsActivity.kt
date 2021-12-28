@@ -44,7 +44,6 @@ class DetailsActivity: BaseDaggerActivity<ActivityDetailsBinding>() {
         }
 
         val webSetting: WebSettings = binding.webView.settings
-        val mUserAgentString = webSetting.userAgentString
         webSetting.javaScriptEnabled = true
         webSetting.javaScriptCanOpenWindowsAutomatically = false
         webSetting.allowFileAccess = true

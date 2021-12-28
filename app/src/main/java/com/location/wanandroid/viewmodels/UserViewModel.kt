@@ -59,6 +59,7 @@ class UserViewModel(private val logRep: UserRepository) : BaseViewModel() {
     }
 
     class Factory @Inject constructor(private val logRep: UserRepository):ViewModelProvider.Factory{
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return UserViewModel(logRep) as T
         }

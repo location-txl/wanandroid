@@ -11,7 +11,6 @@
  */
 
 import com.location.dependencies.*
-apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion AppConfig.compile_version
     buildToolsVersion AppConfig.build_tool_version

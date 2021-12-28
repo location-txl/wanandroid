@@ -35,6 +35,7 @@ class CollectViewModel(private val userRepository:UserRepository): BaseViewModel
     }
 
     class Factory @Inject constructor(private val userRepository:UserRepository):ViewModelProvider.Factory{
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return CollectViewModel(userRepository) as T
         }
