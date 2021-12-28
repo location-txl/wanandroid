@@ -4,6 +4,7 @@ import com.location.base.EmptyData
 import com.location.wanandroid.data.UserData
 import com.location.wanandroid.data.collect.WanCollectArticle
 import com.location.wanandroid.data.WanResponse
+import com.location.wanandroid.data.collect.CollectArticleItem
 import com.location.wanandroid.data.collect.CollectWebSliteData
 import retrofit2.http.*
 
@@ -28,7 +29,7 @@ interface UserService {
     suspend fun collectArticle(@Path("collectId") id: Long): WanResponse<EmptyData>
 
     /**
-     * 收藏站内文章 id为收藏的文章id
+     * 取消收藏站内文章 id为收藏的文章id 文章列表页
      * {
     "data": null,
     "errorCode": 0,
@@ -70,27 +71,19 @@ interface UserService {
     @GET("lg/collect/usertools/json")
     suspend fun getWebSliteList(): CollectWebSliteData
 
+    /**
+     * 取消收藏 在收藏列表页
+     * @param id Int
+     * @param originId Int
+     * @return WanResponse<EmptyData>
+     * @see CollectArticleItem
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    suspend fun unCollectArticleForCollectPage(
+        @Path("id") id: Int,
+        @Field("originId") originId: Int
+    ): WanResponse<EmptyData>
 
-//    @FormUrlEncoded
-//    @POST(LOGIN)
-//    fun loginForLiveData(
-//        @Field("username") userName: String,
-//        @Field("password") pwd: String
-//    ): HttpLiveData<WanResponse<UserData>>
-
-
-//    @FormUrlEncoded
-//    @POST(LOGIN)
-//    fun loginForCall(
-//        @Field("username") userName: String,
-//        @Field("password") pwd: String
-//    ): Call<ResponseBody>
-
-//    @FormUrlEncoded
-//    @POST(LOGIN)
-//    fun loginForRxJava(
-//        @Field("username") userName: String,
-//        @Field("password") pwd: String
-//    ): Single<String>
 
 }

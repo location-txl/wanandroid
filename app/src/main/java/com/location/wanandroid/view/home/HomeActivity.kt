@@ -82,10 +82,6 @@ class HomeActivity : BaseDaggerActivity<ActivityHomeBinding>()  {
             binding.homeViewpager.setCurrentItem(index,true)
 
         }
-//        DaggerHomeComment.create().inject(this)
-//        assertNotNull(homeRep)
-//        assertNotNull(testData)
-//        logDebug("TestScop","HomeRep code=${homeRep.hashCode()}")
     }
 }
 

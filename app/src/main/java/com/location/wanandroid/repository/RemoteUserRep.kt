@@ -35,5 +35,9 @@ class RemoteUserRep(private val service:UserService): UserRepository {
         return safeCall { executeResponse(service.getWebSliteList()) }
     }
 
+    override suspend fun unCollectArticleForCollectPage(id: Int, originId: Int): Result<EmptyData> {
+        return safeCall { executeResponse(service.unCollectArticleForCollectPage(id, originId)) }
+    }
+
 
 }
