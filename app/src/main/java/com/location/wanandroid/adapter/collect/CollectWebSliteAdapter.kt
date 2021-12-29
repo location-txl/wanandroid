@@ -15,20 +15,19 @@ import com.location.wanandroid.databinding.ItemCollectWebsliteBinding
  * description：
  */
 class CollectWebSliteAdapter :
-    BaseAdapter<CollectWebSlite, ViewHolder>(CollectWebSlite.DiffCallback()) {
+    BaseAdapter<CollectWebSlite, CollectWebSliteAdapter.ViewHolder>(CollectWebSlite.DiffCallback()) {
     override val vHClazz: Class<ViewHolder>
         get() = ViewHolder::class.java
     override val layoutId: Int
         get() = R.layout.item_collect_webslite
 
-}
-
-
-class ViewHolder(binding: ItemCollectWebsliteBinding) :
-    BaseViewHolder<ItemCollectWebsliteBinding, CollectWebSlite>(binding) {
-    override fun onBind(data: CollectWebSlite) {
-        binding.webSlite = data
-        binding.notifyPropertyChanged(BR.webSlite)
+    class ViewHolder(binding: ItemCollectWebsliteBinding) :
+        BaseViewHolder<ItemCollectWebsliteBinding, CollectWebSlite>(binding) {
+        override fun onBind(data: CollectWebSlite) {
+            binding.webSlite = data
+            binding.notifyPropertyChanged(BR.webSlite)
+        }
     }
-
 }
+
+

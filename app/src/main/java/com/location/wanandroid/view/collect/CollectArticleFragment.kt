@@ -1,21 +1,16 @@
 package com.location.wanandroid.view.collect
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.location.base.BaseDaggerVmFragment
-import com.location.base.BaseFragment
 import com.location.wanandroid.R
-import com.location.wanandroid.adapter.coolect.CollectArticleAdapter
+import com.location.wanandroid.adapter.collect.CollectArticleAdapter
 import com.location.wanandroid.data.collect.CollectArticleItem
 import com.location.wanandroid.databinding.FragmentHomeBinding
 import com.location.wanandroid.viewmodels.collect.CollectViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  *
