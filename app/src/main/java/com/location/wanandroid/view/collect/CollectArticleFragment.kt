@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.location.base.BaseDaggerVmFragment
+import com.location.base.recyclerview.DeleteItemTouchCallback
+import com.location.base.toast
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.collect.CollectArticleAdapter
 import com.location.wanandroid.data.collect.CollectArticleItem
@@ -16,10 +19,11 @@ import kotlinx.coroutines.flow.collectLatest
  *
  * @author tianxiaolong
  * time：2021/3/6 4:58 PM
- * description：
+ * description：我的收藏文章界面
  */
 class CollectArticleFragment :
-    BaseDaggerVmFragment<FragmentHomeBinding, CollectViewModel.Factory>() {
+    BaseDaggerVmFragment<FragmentHomeBinding, CollectViewModel.Factory>(),
+    DeleteItemTouchCallback.ItemDeleteCallback {
     private val viewModel: CollectViewModel by viewModels { factory }
     private val adapter = CollectArticleAdapter(this::removeCollect)
 
@@ -31,6 +35,8 @@ class CollectArticleFragment :
                 adapter.submitData(it)
             }
         }
+        ItemTouchHelper(DeleteItemTouchCallback(this))
+            .attachToRecyclerView(binding.recyclerview)
     }
 
     override val layoutId: Int
@@ -38,6 +44,22 @@ class CollectArticleFragment :
 
 
     fun removeCollect(pos:Int,item: CollectArticleItem){
-        viewModel.remove(item)
+        unCollect(pos)
+    }
+
+    override fun delete(position: Int) {
+        unCollect(position)
+    }
+
+    private fun unCollect(position: Int) {
+        lifecycleScope.launchWhenResumed {
+            val itemData = adapter.getItemData(position)
+            if (viewModel.removeRemoteData(itemData)) {
+                viewModel.removeLocalData(itemData)
+            } else {
+                adapter.notifyItemChanged(position)
+                toast("取消收藏失败")
+            }
+        }
     }
 }

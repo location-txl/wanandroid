@@ -38,17 +38,17 @@ class CollectViewModel(private val userRepository:UserRepository): BaseViewModel
            return@combine filter
         }
     }
-    fun remove(item: CollectArticleItem) {
-        viewModelScope.launch {
-            var result =
-                userRepository.unCollectArticleForCollectPage(item.id, item.originId)
-            if(result.isSuccess()){
-                val removes = _removeItemFlow.value
-                val list = mutableListOf(item)
-                list.addAll(removes)
-                _removeItemFlow.value = list
-            }
-        }
+    suspend fun removeRemoteData(item: CollectArticleItem):Boolean{
+        return userRepository.unCollectArticleForCollectPage(item.id, item.originId).isSuccess()
+    }
+
+    fun removeLocalData(item: CollectArticleItem) {
+
+        val removes = _removeItemFlow.value
+        val list = mutableListOf(item)
+        list.addAll(removes)
+        _removeItemFlow.value = list
+
     }
 
     fun getWebSliteList():LiveData<List<CollectWebSlite>>{

@@ -17,6 +17,7 @@ import com.location.wanandroid.databinding.ItemCollectBinding
 class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit) :
     BasePagingDataAdapter<CollectArticleItem, CollectArticleAdapter.ViewHolder>(
         CollectArticleItem.DiffCallback()) {
+
     override val layoutId: Int
         get() = R.layout.item_collect
     override val vHClazz: Class<ViewHolder>
@@ -49,6 +50,7 @@ class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleIt
         }
 
     }
+
 }
 
 
