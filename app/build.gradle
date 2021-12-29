@@ -102,7 +102,7 @@ dependencies {
     implementation Deps.lifecycleScop
 
 
-//    implementation "androidx.navigation:navigation-runtime-ktx:$navigation_version"
+//    implementation AndroidX.navigation.runtimeKtx
     implementation Deps.navigationFragment
     implementation Deps.navigationUI
 

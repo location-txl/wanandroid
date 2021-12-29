@@ -40,7 +40,7 @@ android {
 
 dependencies {
     implementation project(":libs:base")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$Versions.kotlin"
+    implementation Kotlin.stdlib
 
     compileOnly Deps.lifecycle_livedata
     implementation Deps.COOKIE
