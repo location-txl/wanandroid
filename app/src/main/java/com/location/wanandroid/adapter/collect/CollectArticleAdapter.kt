@@ -14,7 +14,7 @@ import com.location.wanandroid.databinding.ItemCollectBinding
  * time：2021/3/6 6:34 PM
  * description：
  */
-class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit) :
+class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit, val itemClick:(pos:Int, item:CollectArticleItem) -> Unit) :
     BasePagingDataAdapter<CollectArticleItem, CollectArticleAdapter.ViewHolder>(
         CollectArticleItem.DiffCallback()) {
 
@@ -24,19 +24,24 @@ class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleIt
         get() = ViewHolder::class.java
 
     override fun viewHolderFactory(): BaseViewHolder.Factory {
-        return Factory(removeCollectFunc)
+        return Factory(removeCollectFunc,  itemClick)
     }
-    class ViewHolder(binding: ItemCollectBinding,val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit) :
+    class ViewHolder(binding: ItemCollectBinding,val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit, val itemClick:(pos:Int, item:CollectArticleItem) -> Unit) :
         BaseViewHolder<ItemCollectBinding, CollectArticleItem>(binding) {
+        init {
+            itemView.setOnClickListener {
+                itemClick(layoutPosition,this.binding.data!!)
+            }
+            binding.removeCollect.setOnClickListener {
+                removeCollectFunc(layoutPosition,this.binding.data!!)
+            }
+        }
         override fun onBind(data: CollectArticleItem) {
             binding.data = data
-            binding.removeCollect.setOnClickListener {
-                removeCollectFunc(layoutPosition,data)
-            }
             binding.notifyPropertyChanged(BR.data)
         }
     }
-    class Factory(val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit):BaseViewHolder.Factory{
+    class Factory(val removeCollectFunc:(pos:Int,item:CollectArticleItem) -> Unit, val itemClickFunc:(pos:Int, item:CollectArticleItem) -> Unit):BaseViewHolder.Factory{
         override fun <VH : BaseViewHolder<*, *>> create(
             clazz: Class<VH>,
             binding: ViewDataBinding,
@@ -45,7 +50,7 @@ class CollectArticleAdapter(val removeCollectFunc:(pos:Int,item:CollectArticleIt
             @Suppress("UNCHECKED_CAST")
             return ViewHolder(
                 binding as ItemCollectBinding,
-                removeCollectFunc
+                removeCollectFunc, itemClickFunc
             ) as VH
         }
 

@@ -2,16 +2,19 @@ package com.location.wanandroid.view.collect
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.location.base.BaseDaggerVmFragment
 import com.location.base.recyclerview.DeleteItemTouchCallback
+import com.location.base.startNewActivity
 import com.location.base.toast
 import com.location.wanandroid.R
 import com.location.wanandroid.adapter.collect.CollectArticleAdapter
 import com.location.wanandroid.data.collect.CollectArticleItem
 import com.location.wanandroid.databinding.FragmentHomeBinding
+import com.location.wanandroid.view.DetailsActivity
 import com.location.wanandroid.viewmodels.collect.CollectViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -25,7 +28,7 @@ class CollectArticleFragment :
     BaseDaggerVmFragment<FragmentHomeBinding, CollectViewModel.Factory>(),
     DeleteItemTouchCallback.ItemDeleteCallback {
     private val viewModel: CollectViewModel by viewModels { factory }
-    private val adapter = CollectArticleAdapter(this::removeCollect)
+    private val adapter = CollectArticleAdapter(this::removeCollect,this::itemClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +48,11 @@ class CollectArticleFragment :
 
     fun removeCollect(pos:Int,item: CollectArticleItem){
         unCollect(pos)
+    }
+    fun itemClick(pos:Int,item: CollectArticleItem){
+        startNewActivity<DetailsActivity>{
+            putExtras(bundleOf(DetailsActivity.KEY_URL to item.link))
+        }
     }
 
     override fun delete(position: Int) {
