@@ -1,7 +1,9 @@
 package com.location.wanandroid
 
+import android.R.attr.top
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,13 +18,19 @@ import com.location.wanandroid.ui.theme.WanAndroidTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+//            navigationBarStyle = SystemBarStyle.auto(
+//                lightScrim = lightScrim,
+//                darkScrim = darkScrim,
+//            ) {
+//                false
+//            }
+        )
         setContent {
-            WanAndroidTheme {
+            WanAndroidTheme(dynamicColor = false) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    WanAndroidApp(
+                        modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
                     )
                 }
             }
@@ -45,3 +53,9 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
+
+private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
+
