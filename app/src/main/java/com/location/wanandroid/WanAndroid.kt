@@ -1,6 +1,8 @@
 package com.location.wanandroid
 
 import android.R.attr.text
+import android.app.ProgressDialog.show
+import android.util.Log.v
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -30,7 +32,9 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaul
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItemColors
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -59,30 +63,43 @@ fun WanAndroidApp(
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
-        val layoutType =
-            NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(windowAdaptiveInfo)
         var currentDirection by remember {
             mutableStateOf<TopDestination>(TopDestination.Home)
         }
         val navigationColors = getWanNavigationColors()
+        var show by remember { mutableStateOf(true) }
+        val originType = NavigationSuiteScaffoldDefaults
+            .calculateFromAdaptiveInfo(windowAdaptiveInfo)
+        val layoutType by remember {
+            derivedStateOf {
+                if(show){
+                    originType
+                }else{
+                    NavigationSuiteType.None
+                }
+            }
+        }
         WanNavigationSuiteScaffold(
             windowAdaptiveInfo = windowAdaptiveInfo,
+            layoutType = layoutType,
             navigation = {
-                TopDestination.entries.forEach {
-                    item(
-                        selected = currentDirection == it,
-                        onClick = { currentDirection = it },
-                        icon = {
-                            Icon(
-                                imageVector = if (currentDirection == it) it.selectIcon else it.unselectIcon,
-                                contentDescription = null
-                            )
-                        },
-                        label = {
-                            Text(stringResource(it.iconTextId))
-                        },
-                        colors = navigationColors,
-                    )
+                if(show){
+                    TopDestination.entries.forEach {
+                        item(
+                            selected = currentDirection == it,
+                            onClick = { currentDirection = it },
+                            icon = {
+                                Icon(
+                                    imageVector = if (currentDirection == it) it.selectIcon else it.unselectIcon,
+                                    contentDescription = null
+                                )
+                            },
+                            label = {
+                                Text(stringResource(it.iconTextId))
+                            },
+                            colors = navigationColors,
+                        )
+                    }
                 }
             }
         ){
@@ -91,12 +108,13 @@ fun WanAndroidApp(
             {
                 Box(
                     Modifier
+                        .fillMaxSize()
                         .padding(it)
                         .consumeWindowInsets(it)
                         .windowInsetsPadding(  // 只应用水平方向的安全区域 padding
                             WindowInsets.safeDrawing.only(
                             WindowInsetsSides.Horizontal,
-                        ),
+                        )
                     ),
                 ){
                     val navController = rememberNavController()
@@ -106,6 +124,7 @@ fun WanAndroidApp(
 
                     ){
                         homeScreen{
+                            show = false
                             navController.navigate(it)
                         }
                         detailScreenScreen()
