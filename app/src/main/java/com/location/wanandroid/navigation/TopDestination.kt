@@ -13,6 +13,7 @@ import androidx.compose.ui.input.key.Key.Companion.H
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 import com.location.wanandroid.R
+import com.location.wanandroid.screen.HomeRoute
 
 enum class TopDestination(
     @StringRes val titleId: Int,
@@ -35,5 +36,4 @@ enum class TopDestination(
     )
 }
 
-@Serializable data object HomeRoute
 @Serializable data object SettingRoute

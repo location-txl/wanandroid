@@ -1,6 +1,15 @@
 package com.location.wanandroid
 
+import android.R.attr.text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.rounded.Home
@@ -10,6 +19,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
@@ -34,6 +44,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.location.wanandroid.navigation.WanNavigationSuiteScaffold
+import com.location.wanandroid.navigation.getWanNavigationColors
+import com.location.wanandroid.screen.DetailRoute
+import com.location.wanandroid.screen.HomeRoute
+import com.location.wanandroid.screen.detailScreenScreen
+import com.location.wanandroid.screen.homeScreen
 
 @Composable
 fun WanAndroidApp(
@@ -46,36 +64,10 @@ fun WanAndroidApp(
         var currentDirection by remember {
             mutableStateOf<TopDestination>(TopDestination.Home)
         }
-        val navigationSuiteItemColors = NavigationSuiteItemColors(
-            navigationBarItemColors = NavigationBarItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-                indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
-            ),
-            navigationRailItemColors = NavigationRailItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-                indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
-            ),
-            navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            ),
-        )
-        NavigationSuiteScaffold(
-            layoutType = layoutType,
-            containerColor = Color.Transparent,
-            navigationSuiteColors = NavigationSuiteDefaults.colors(
-                navigationBarContentColor = NiaNavigationDefaults.navigationContentColor(),
-                navigationRailContainerColor = Color.Transparent,
-            ),
-            navigationSuiteItems = {
+        val navigationColors = getWanNavigationColors()
+        WanNavigationSuiteScaffold(
+            windowAdaptiveInfo = windowAdaptiveInfo,
+            navigation = {
                 TopDestination.entries.forEach {
                     item(
                         selected = currentDirection == it,
@@ -89,73 +81,41 @@ fun WanAndroidApp(
                         label = {
                             Text(stringResource(it.iconTextId))
                         },
-                        colors = navigationSuiteItemColors,
+                        colors = navigationColors,
                     )
                 }
             }
-        ) {
-            Text("hello")
-        }
-    }
-}
+        ){
+            Scaffold(
+                modifier = modifier,)
+            {
+                Box(
+                    Modifier
+                        .padding(it)
+                        .consumeWindowInsets(it)
+                        .windowInsetsPadding(  // 只应用水平方向的安全区域 padding
+                            WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Horizontal,
+                        ),
+                    ),
+                ){
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = HomeRoute,
 
-
-@Composable
-private fun TestNavigationSuite(
-    modifier: Modifier = Modifier,
-    windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
-) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        val layoutType =
-            NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(windowAdaptiveInfo)
-        var currentDirection by remember {
-            mutableStateOf<TopDestination>(TopDestination.Home)
-        }
-        val navigationSuiteItemColors = NavigationSuiteItemColors(
-            navigationBarItemColors = NavigationBarItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-                indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
-            ),
-            navigationRailItemColors = NavigationRailItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-                indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
-            ),
-            navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-                selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            ),
-        )
-        NavigationSuite(
-            layoutType = layoutType,
-        ) {
-            TopDestination.entries.forEach {
-                item(
-                    selected = currentDirection == it,
-                    onClick = { currentDirection = it },
-                    icon = {
-                        Icon(
-                            imageVector = if (currentDirection == it) it.selectIcon else it.unselectIcon,
-                            contentDescription = null
-                        )
-                    },
-                    label = {
-                        Text(stringResource(it.iconTextId))
-                    },
-                    colors = navigationSuiteItemColors,
-                )
+                    ){
+                        homeScreen{
+                            navController.navigate(it)
+                        }
+                        detailScreenScreen()
+                    }
+                }
             }
-
         }
     }
 }
+
 
 
 @Preview(device = "spec:parent=Nexus S")
@@ -164,17 +124,5 @@ private fun WanAndroidAppPreview() {
     MaterialTheme {
         WanAndroidApp()
     }
-
-
 }
 
-object NiaNavigationDefaults {
-    @Composable
-    fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
-
-    @Composable
-    fun navigationSelectedItemColor() = MaterialTheme.colorScheme.onPrimaryContainer
-
-    @Composable
-    fun navigationIndicatorColor() = MaterialTheme.colorScheme.primaryContainer
-}

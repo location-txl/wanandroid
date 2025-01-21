@@ -2,6 +2,7 @@ package com.location.wanandroid
 
 import android.R.attr.top
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -13,9 +14,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.location.wanandroid.network.WanAndroidApi
+import com.location.wanandroid.network.execute
 import com.location.wanandroid.ui.theme.WanAndroidTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.activityScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.compose.KoinContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import org.koin.core.scope.Scope
 
-class MainActivity : ComponentActivity() {
+object TestVm: KoinComponent{
+//    val vm: UserViewModel = get()
+}
+
+class MainActivity : ComponentActivity()  {
+    private val wanAndroidApi: WanAndroidApi by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
@@ -26,16 +46,23 @@ class MainActivity : ComponentActivity() {
 //                false
 //            }
         )
+        lifecycleScope.launch(Dispatchers.IO){
+//            val r = wanAndroidApi.execute {
+//                getArticleList(0)
+//            }
+//            Log.i("MainActivity", "onCreate: $r")
+        }
         setContent {
-            WanAndroidTheme(dynamicColor = false) {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            KoinContext {
+                WanAndroidTheme(dynamicColor = false) {
                     WanAndroidApp(
-                        modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
                     )
                 }
             }
+
         }
     }
+
 }
 
 @Composable

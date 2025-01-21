@@ -82,4 +82,11 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.retrofit.kotlin.serialization)
     /* retrofit end */
+
+    /*koin start*/
+    implementation(project.dependencies.platform(libs.koin.bom))
+//    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.navigation)
+
 }

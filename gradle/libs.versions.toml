@@ -15,6 +15,7 @@ retrofit = "2.11.0"
 okhttp = "4.12.0"
 okhttpLoggingInterceptor = "3.1.0"
 kotlinxSerializationJson = "1.8.0"
+koin = "4.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +55,11 @@ retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "conv
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logging-interceptor = { group = "com.github.ihsanbal", name = "LoggingInterceptor", version.ref = "okhttpLoggingInterceptor" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
+koin-compose-navigation = { group = "io.insert-koin", name = "koin-androidx-compose-navigation" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
