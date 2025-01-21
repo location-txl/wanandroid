@@ -21,8 +21,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.compose.navigation.koinNavViewModel
 import org.koin.compose.koinInject
 import org.koin.core.KoinApplication.Companion.init
+import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import kotlin.time.Duration.Companion.seconds
 
@@ -32,8 +34,10 @@ import kotlin.time.Duration.Companion.seconds
 fun NavGraphBuilder.detailScreenScreen(modifier: Modifier = Modifier,
                                        ) {
     composable<DetailRoute>{
-        val detailViewModel: DetailViewModel = koinViewModel()
         val route = it.toRoute<DetailRoute>()
+        val detailViewModel: DetailViewModel = koinViewModel{
+            parametersOf(route)
+        }
         val count = detailViewModel.countFlow.collectAsStateWithLifecycle(0)
 
         Column{
@@ -54,10 +58,9 @@ fun TextAlign(modifier: Modifier = Modifier, v: Int) {
 
 
 
-class DetailViewModel(val api: WanAndroidApi): ViewModel(){
-
+class DetailViewModel(val api: WanAndroidApi, route: DetailRoute): ViewModel(){
     init {
-        println("init DetailViewModel api: $api")
+        println("init DetailViewModel api: $api route: $route")
         viewModelScope
     }
     val countFlow: StateFlow<Int> = flow {
