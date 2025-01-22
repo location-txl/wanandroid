@@ -1,6 +1,7 @@
 package com.location.wanandroid
 
 import android.R.attr.top
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -19,6 +20,7 @@ import com.location.wanandroid.network.WanAndroidApi
 import com.location.wanandroid.network.execute
 import com.location.wanandroid.ui.theme.WanAndroidTheme
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.AndroidScopeComponent
@@ -37,15 +39,20 @@ class MainActivity : ComponentActivity()  {
     private val wanAndroidApi: WanAndroidApi by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge(
+        lifecycleScope.launch{
+            enableEdgeToEdge(
+
+                )
 //            navigationBarStyle = SystemBarStyle.auto(
 //                lightScrim = lightScrim,
 //                darkScrim = darkScrim,
 //            ) {
 //                false
 //            }
-        )
+        }
+
         lifecycleScope.launch(Dispatchers.IO){
 //            val r = wanAndroidApi.execute {
 //                getArticleList(0)
@@ -55,7 +62,7 @@ class MainActivity : ComponentActivity()  {
         setContent {
             KoinContext {
                 WanAndroidTheme(dynamicColor = false) {
-                    WanAndroidApp(
+                    WanAndroidTest(
                     )
                 }
             }

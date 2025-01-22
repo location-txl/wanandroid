@@ -1,6 +1,8 @@
 package com.location.wanandroid.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,8 +33,7 @@ import kotlin.time.Duration.Companion.seconds
 @Serializable data class DetailRoute(val url: String)
 
 
-fun NavGraphBuilder.detailScreenScreen(modifier: Modifier = Modifier,
-                                       ) {
+fun NavGraphBuilder.detailScreenScreen(paddingValues: PaddingValues, ) {
     composable<DetailRoute>{
         val route = it.toRoute<DetailRoute>()
         val detailViewModel: DetailViewModel = koinViewModel{
@@ -40,7 +41,7 @@ fun NavGraphBuilder.detailScreenScreen(modifier: Modifier = Modifier,
         }
         val count = detailViewModel.countFlow.collectAsStateWithLifecycle(0)
 
-        Column{
+        Column(modifier = Modifier.padding(paddingValues)){
 
             Text("Detail Route url: ${detailViewModel.convertUrl(route.url)}")
             HorizontalDivider()

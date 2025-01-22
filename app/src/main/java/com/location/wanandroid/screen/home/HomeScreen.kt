@@ -1,14 +1,16 @@
-package com.location.wanandroid.screen
+package com.location.wanandroid.screen.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
+import com.location.wanandroid.screen.DetailRoute
 import kotlinx.serialization.Serializable
 
 @Serializable data object HomeRoute
+
+@Serializable data object HomeBase
 
 
 
